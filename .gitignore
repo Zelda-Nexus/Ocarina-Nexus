@@ -1,0 +1,34 @@
+# Environment
+.env
+
+# Virtual environment
+.venv/
+
+# Generated data (reproducible via the pipeline)
+data/
+logs/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+.pytest_cache/
+
+# IDE
+.vscode/
+.idea/
+
+# Internal notes
+INFORMATION.md
+
+# Tests
+tests/
+test_*.py
+*_test.py
+conftest.py
+
+# Work in progress
+scripts/run_pipeline.py
+src/ocarina_nexus/ingestion/transform_characters.py
+src/ocarina_nexus/utils/http.py
