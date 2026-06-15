@@ -28,6 +28,9 @@ test_*.py
 *_test.py
 conftest.py
 
+# Backlog
+BACKLOG.md
+
 # Work in progress
 scripts/run_pipeline.py
 src/ocarina_nexus/ingestion/transform_characters.py
