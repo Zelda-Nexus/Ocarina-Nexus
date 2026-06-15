@@ -1,6 +1,6 @@
-"""
+﻿"""
 Pydantic schemas for Ocarina of Time entities.
-Phase 1 — Characters.
+Phase 1 - Characters.
 """
 
 from enum import Enum
@@ -16,12 +16,19 @@ class Race(str, Enum):
     GERUDO = "Gerudo"
     SHEIKAH = "Sheikah"
     DEKU = "Deku"
+    GREAT_FAIRY = "Great Fairy"
     FAIRY = "Fairy"
-    HUMAN = "Human"
+    DEITY = "Deity"
     UNKNOWN = "Unknown"
 
 
 class Timeline(str, Enum):
+    """
+    NOTE: this field cannot be derived from the infobox 'Era(s)' field
+    (which describes a global narrative era of the series, not when
+    the character appears in OOT). Stays UNKNOWN in Phase 1,
+    will be filled in Phase 3 (Lore Explorer, task P3-04).
+    """
     CHILD = "child"
     ADULT = "adult"
     BOTH = "both"
@@ -39,7 +46,10 @@ class CharacterRole(str, Enum):
 
 
 class RawCharacter(BaseModel):
-    """Raw data from scraping (Bronze layer). Full infobox kept as-is — no information loss."""
+    """
+    Raw data from scraping (Bronze layer).
+    The full infobox is kept as-is: no information loss.
+    """
     name: str
     url: str
     infobox: dict[str, str] = Field(default_factory=dict)
@@ -50,18 +60,26 @@ class RawCharacter(BaseModel):
 
 
 class Character(BaseModel):
-    """Cleaned and normalized entity (Silver layer)."""
+    """
+    Cleaned and normalized entity (Silver layer).
+    """
     id: str
     name: str
     race: Race = Race.UNKNOWN
+    gender: Optional[str] = None
     role: CharacterRole = CharacterRole.NPC
     timeline: Timeline = Timeline.UNKNOWN
+
+    eras: list[str] = Field(default_factory=list)
     titles: list[str] = Field(default_factory=list)
     aliases: list[str] = Field(default_factory=list)
-    family: Optional[str] = None
-    association: Optional[str] = None
+    family_members: list[str] = Field(default_factory=list)
+    associations: list[str] = Field(default_factory=list)
+    locations: list[str] = Field(default_factory=list)
+
     description: Optional[str] = None
     is_playable: bool = False
     is_boss: bool = False
+
     source_url: str
     scraped_at: str

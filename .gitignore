@@ -32,3 +32,4 @@ conftest.py
 scripts/run_pipeline.py
 src/ocarina_nexus/ingestion/transform_characters.py
 src/ocarina_nexus/utils/http.py
+scripts/explore_bronze.py
