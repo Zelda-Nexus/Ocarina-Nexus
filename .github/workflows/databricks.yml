@@ -1,0 +1,63 @@
+# =============================================================================
+# CI/CD Databricks
+#
+# Deux secrets a creer dans GitHub (Settings > Secrets and variables > Actions) :
+#   DATABRICKS_HOST   https://dbc-xxxxxxxx-xxxx.cloud.databricks.com
+#   DATABRICKS_TOKEN  jeton personnel genere depuis Settings > Developer
+#
+# Regle du projet : rien n'est deploye depuis un poste local sur `prod`.
+# Le seul chemin vers le workspace passe par ce workflow.
+# =============================================================================
+
+name: Databricks bundle
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+env:
+  DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+  DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+
+concurrency:
+  group: databricks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # ---------------------------------------------------------------------------
+  # Sur chaque pull request : on verifie que le bundle est valide sans rien
+  # deployer. Une erreur de syntaxe YAML ou une reference cassee echoue ici,
+  # pas dans le workspace.
+  # ---------------------------------------------------------------------------
+  validate:
+    name: Valider le bundle
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: databricks/setup-cli@main
+
+      - name: databricks bundle validate
+        run: databricks bundle validate --target dev
+
+  # ---------------------------------------------------------------------------
+  # Sur main uniquement : deploiement puis execution du smoke test.
+  # Si le smoke test echoue, le workflow echoue — on le sait immediatement.
+  # ---------------------------------------------------------------------------
+  deploy:
+    name: Deployer sur dev
+    needs: validate
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: databricks/setup-cli@main
+
+      - name: databricks bundle deploy
+        run: databricks bundle deploy --target dev
+
+      - name: Executer le smoke test
+        run: databricks bundle run smoke_test --target dev

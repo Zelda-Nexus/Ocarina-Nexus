@@ -1,0 +1,63 @@
+# =============================================================================
+# Ocarina Nexus — Databricks Asset Bundle
+#
+# Ce fichier est le point d'entree de toute l'infrastructure Databricks.
+# Tout ce qui existe dans le workspace doit etre decrit ici ou dans resources/.
+# Regle du projet : on ne cree jamais un job ou un pipeline a la main dans l'UI.
+#
+#   databricks bundle validate --target dev
+#   databricks bundle deploy   --target dev
+#   databricks bundle run smoke_test --target dev
+# =============================================================================
+
+bundle:
+  name: ocarina-nexus
+
+include:
+  - resources/*.yml
+  - resources/jobs/*.yml
+
+# -----------------------------------------------------------------------------
+# Variables : tout ce qui change entre dev et prod passe par ici.
+# Aucun nom de catalogue ne doit etre ecrit en dur dans le code.
+# -----------------------------------------------------------------------------
+variables:
+  catalog:
+    description: "Catalogue Unity Catalog cible"
+    default: ocarina_dev
+
+  landing_volume:
+    description: "Volume UC ou GitHub Actions depose les fichiers bruts"
+    default: /Volumes/ocarina_dev/bronze/landing
+
+# -----------------------------------------------------------------------------
+# Cibles de deploiement.
+#
+# Sur Free Edition il n'y a qu'un seul workspace : dev et prod sont donc
+# deux CATALOGUES dans ce meme workspace, pas deux workspaces distincts.
+# La separation reste vraie du point de vue des donnees, et le jour ou tu
+# passes sur une vraie organisation, seul le champ `host` change.
+# -----------------------------------------------------------------------------
+targets:
+  dev:
+    mode: development # prefixe les jobs par [dev tonnom] et les met en pause
+    default: true
+    workspace:
+      host: https://dbc-3a8e384c-7c72.cloud.databricks.com/browse?o=7474646415670671
+    variables:
+      catalog: ocarina_dev
+      landing_volume: /Volumes/ocarina_dev/bronze/landing
+
+  prod:
+    mode: production # interdit les modifications manuelles depuis l'UI
+    workspace:
+      host: https://dbc-3a8e384c-7c72.cloud.databricks.com/browse?o=7474646415670671
+      root_path: /Workspace/Users/${workspace.current_user.userName}/.bundle/${bundle.name}/${bundle.target}
+    variables:
+      catalog: ocarina_prod
+      landing_volume: /Volumes/ocarina_prod/bronze/landing
+    run_as:
+      user_name: ${workspace.current_user.userName}
+    permissions:
+      - level: CAN_MANAGE
+        user_name: ${workspace.current_user.userName}

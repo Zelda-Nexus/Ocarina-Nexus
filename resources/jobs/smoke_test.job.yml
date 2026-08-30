@@ -1,0 +1,38 @@
+# =============================================================================
+# Job de smoke test.
+#
+# Il ne sert a rien fonctionnellement, et c'est exactement le but : il valide
+# que la chaine complete fonctionne (Git -> CI -> bundle -> workspace -> Delta)
+# avant qu'on y mette la moindre logique metier.
+#
+# Aucun bloc de compute n'est declare : sur Free Edition, une tache notebook
+# sans cluster attache s'execute automatiquement en serverless.
+# =============================================================================
+
+resources:
+  jobs:
+    smoke_test:
+      name: "ocarina — smoke test"
+      description: >-
+        Verifie que le bundle est deploye, que le catalogue est accessible
+        et qu'une table Delta peut etre ecrite puis relue.
+
+      tags:
+        project: ocarina-nexus
+        layer: ops
+
+      tasks:
+        - task_key: check_platform
+          notebook_task:
+            notebook_path: ../../00_smoke_test.py
+            base_parameters:
+              catalog: ${var.catalog}
+              landing_volume: ${var.landing_volume}
+              bundle_target: ${bundle.target}
+
+      # Sur Free Edition : max 5 taches de job simultanees pour tout le compte.
+      # La file d'attente evite un echec brutal si un autre job tourne deja.
+      queue:
+        enabled: true
+
+      max_concurrent_runs: 1

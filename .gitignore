@@ -1,3 +1,6 @@
+# databricks
+.databricks/
+
 # Environment
 .env
 
@@ -7,6 +10,10 @@
 # Generated data (reproducible via the pipeline)
 data/
 logs/
+
+# Database
+*.duckdb
+# /data
 
 # Python
 __pycache__/
@@ -21,12 +28,6 @@ dist/
 
 # Internal notes
 INFORMATION.md
-
-# Tests
-tests/
-test_*.py
-*_test.py
-conftest.py
 
 # Backlog
 BACKLOG.md
