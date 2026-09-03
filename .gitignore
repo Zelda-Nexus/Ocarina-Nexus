@@ -3,6 +3,7 @@
 
 # Environment
 .env
+pyproject.toml.bak
 
 # Virtual environment
 .venv/

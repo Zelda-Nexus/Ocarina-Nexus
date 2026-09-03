@@ -1,12 +1,13 @@
-﻿import sys
+import sys
+
 sys.path.insert(0, "src")
+from ocarina_nexus.utils.infobox_parser import get_description, parse_infobox
 from ocarina_nexus.utils.wiki_api import get_page_data
-from ocarina_nexus.utils.infobox_parser import parse_infobox, get_title, get_description
 
 for name in ["Saria", "Darunia", "Link", "Princess Zelda"]:
-    print("="*60)
+    print("=" * 60)
     print(name)
-    print("="*60)
+    print("=" * 60)
 
     data = get_page_data(name)
     if not data:

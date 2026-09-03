@@ -70,7 +70,7 @@ except Exception as e:
 
 # COMMAND ----------
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 TABLE = f"{CATALOG}.ops.deployment_check"
 
@@ -84,7 +84,7 @@ spark.sql(f"""
     COMMENT 'Trace des smoke tests. Sert de preuve que le deploiement fonctionne.'
 """)
 
-ligne = [(datetime.now(timezone.utc), BUNDLE_TARGET, spark.version)]
+ligne = [(datetime.now(UTC), BUNDLE_TARGET, spark.version)]
 colonnes = ["checked_at", "bundle_target", "spark_version"]
 
 spark.createDataFrame(ligne, colonnes).write.mode("append").saveAsTable(TABLE)
@@ -93,9 +93,7 @@ print(f"OK — ecriture reussie dans {TABLE}")
 
 # COMMAND ----------
 
-display(
-    spark.table(TABLE).orderBy("checked_at", ascending=False).limit(10)
-)
+display(spark.table(TABLE).orderBy("checked_at", ascending=False).limit(10))
 
 # COMMAND ----------
 

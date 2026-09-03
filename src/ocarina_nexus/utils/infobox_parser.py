@@ -13,6 +13,7 @@ Typical HTML structure:
 """
 
 import re
+
 from bs4 import BeautifulSoup
 
 _REFERENCE_PATTERN = re.compile(r"^\[\d+\]$")

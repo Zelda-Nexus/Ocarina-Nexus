@@ -2,15 +2,15 @@
 OOT character scraper via the Zelda Wiki MediaWiki API.
 """
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from loguru import logger
 
+from ocarina_nexus.config import DATA_BASE_URL, get_bronze_path
 from ocarina_nexus.models.entities import RawCharacter
-from ocarina_nexus.utils.wiki_api import get_category_members, get_page_data
-from ocarina_nexus.utils.infobox_parser import parse_infobox, get_title, get_description
+from ocarina_nexus.utils.infobox_parser import get_description, get_title, parse_infobox
 from ocarina_nexus.utils.logging import setup_logging
-from ocarina_nexus.config import get_bronze_path, DATA_BASE_URL
+from ocarina_nexus.utils.wiki_api import get_category_members, get_page_data
 
 CATEGORY = "Characters in Ocarina of Time"
 
@@ -43,7 +43,7 @@ def scrape_character(title: str) -> RawCharacter | None:
         description=description,
         categories=data["categories"],
         source="zeldawiki",
-        scraped_at=datetime.now(timezone.utc).isoformat(),
+        scraped_at=datetime.now(UTC).isoformat(),
     )
 
 
@@ -77,7 +77,9 @@ def run(limit: int | None = None, resume: bool = True):
         character = scrape_character(title)
 
         if character:
-            output_file.write_text(character.model_dump_json(indent=2), encoding="utf-8")
+            output_file.write_text(
+                character.model_dump_json(indent=2), encoding="utf-8"
+            )
             scraped += 1
         else:
             errors += 1

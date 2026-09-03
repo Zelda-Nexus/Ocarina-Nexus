@@ -1,10 +1,10 @@
-﻿"""
+"""
 Pydantic schemas for Ocarina of Time entities.
 Phase 1 - Characters.
 """
 
 from enum import Enum
-from typing import Optional
+
 from pydantic import BaseModel, Field
 
 
@@ -29,6 +29,7 @@ class Timeline(str, Enum):
     the character appears in OOT). Stays UNKNOWN in Phase 1,
     will be filled in Phase 3 (Lore Explorer, task P3-04).
     """
+
     CHILD = "child"
     ADULT = "adult"
     BOTH = "both"
@@ -50,23 +51,25 @@ class RawCharacter(BaseModel):
     Raw data from scraping (Bronze layer).
     The full infobox is kept as-is: no information loss.
     """
+
     name: str
     url: str
     infobox: dict[str, str] = Field(default_factory=dict)
-    description: Optional[str] = None
+    description: str | None = None
     categories: list[str] = Field(default_factory=list)
     source: str = "zeldawiki"
-    scraped_at: Optional[str] = None
+    scraped_at: str | None = None
 
 
 class Character(BaseModel):
     """
     Cleaned and normalized entity (Silver layer).
     """
+
     id: str
     name: str
     race: Race = Race.UNKNOWN
-    gender: Optional[str] = None
+    gender: str | None = None
     role: CharacterRole = CharacterRole.NPC
     timeline: Timeline = Timeline.UNKNOWN
 
@@ -77,7 +80,7 @@ class Character(BaseModel):
     associations: list[str] = Field(default_factory=list)
     locations: list[str] = Field(default_factory=list)
 
-    description: Optional[str] = None
+    description: str | None = None
     is_playable: bool = False
     is_boss: bool = False
 

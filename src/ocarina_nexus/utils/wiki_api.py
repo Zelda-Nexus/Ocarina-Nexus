@@ -6,10 +6,16 @@ API docs  : https://www.mediawiki.org/wiki/API:Main_page
 """
 
 import time
+
 import httpx
 from loguru import logger
 
-from ocarina_nexus.config import USER_AGENT, SCRAPING_DELAY, SCRAPING_MAX_RETRIES, DATA_BASE_URL
+from ocarina_nexus.config import (
+    DATA_BASE_URL,
+    SCRAPING_DELAY,
+    SCRAPING_MAX_RETRIES,
+    USER_AGENT,
+)
 
 API_URL = f"{DATA_BASE_URL}/w/api.php"
 HEADERS = {"User-Agent": USER_AGENT}
