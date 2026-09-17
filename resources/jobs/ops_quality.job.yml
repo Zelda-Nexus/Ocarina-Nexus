@@ -1,0 +1,40 @@
+# =============================================================================
+# Job de controle qualite — rejoue apres chaque run Silver.
+# =============================================================================
+
+resources:
+  jobs:
+    ops_quality:
+      name: "ocarina — ops quality checks"
+      description: "Controles NOT NULL / unicite / couverture / fraicheur sur Silver."
+
+      tags:
+        project: ocarina-nexus
+        layer: ops
+
+      job_clusters:
+        - job_cluster_key: ops_cluster
+          new_cluster:
+            spark_version: "15.4.x-scala2.12"
+            node_type_id: "Standard_DS3_v2" # a ajuster au type de noeud reellement disponible
+            num_workers: 1
+            data_security_mode: SINGLE_USER
+
+      tasks:
+        - task_key: trigger_silver
+          run_job_task:
+            job_id: ${resources.jobs.silver_transform.id}
+
+        - task_key: ops_quality_checks
+          job_cluster_key: ops_cluster
+          depends_on:
+            - task_key: trigger_silver
+          notebook_task:
+            notebook_path: ../../notebooks/ops/01_ops_quality_checks.scala
+            base_parameters:
+              catalog: ${var.catalog}
+
+      queue:
+        enabled: true
+
+      max_concurrent_runs: 1

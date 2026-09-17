@@ -27,6 +27,8 @@ dependencies = [
 dev = [
     "ruff>=0.16.5",
     "spark>=0.2.1",
+    "pytest>=8.0.0",
+    "pytest-mock>=3.14.0",
 ]
 
 [tool.ruff]

@@ -1,0 +1,59 @@
+# =============================================================================
+# Job de modelisation Gold — dimensions, faits, fusion du graphe de
+# connaissances (fact_entity_relation), stubs RAG.
+# =============================================================================
+
+resources:
+  jobs:
+    gold_transform:
+      name: "ocarina — gold transform"
+      description: "Modele en etoile (site) + fusion des relations entites (graphe)."
+
+      tags:
+        project: ocarina-nexus
+        layer: gold
+
+      job_clusters:
+        - job_cluster_key: gold_cluster
+          new_cluster:
+            spark_version: "15.4.x-scala2.12"
+            node_type_id: "Standard_DS3_v2" # a ajuster au type de noeud reellement disponible
+            num_workers: 1
+            data_security_mode: SINGLE_USER
+
+      tasks:
+        - task_key: trigger_ops_quality
+          run_job_task:
+            job_id: ${resources.jobs.ops_quality.id}
+
+        - task_key: gold_dimensions
+          job_cluster_key: gold_cluster
+          depends_on:
+            - task_key: trigger_ops_quality
+          notebook_task:
+            notebook_path: ../../notebooks/gold/01_gold_dimensions.scala
+            base_parameters:
+              catalog: ${var.catalog}
+
+        - task_key: gold_facts
+          job_cluster_key: gold_cluster
+          depends_on:
+            - task_key: gold_dimensions
+          notebook_task:
+            notebook_path: ../../notebooks/gold/02_gold_facts.scala
+            base_parameters:
+              catalog: ${var.catalog}
+
+        - task_key: gold_rag_stubs
+          job_cluster_key: gold_cluster
+          depends_on:
+            - task_key: trigger_ops_quality
+          notebook_task:
+            notebook_path: ../../notebooks/gold/03_gold_rag_stubs.scala
+            base_parameters:
+              catalog: ${var.catalog}
+
+      queue:
+        enabled: true
+
+      max_concurrent_runs: 1

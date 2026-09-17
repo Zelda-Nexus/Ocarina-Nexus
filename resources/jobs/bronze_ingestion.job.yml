@@ -1,0 +1,79 @@
+# =============================================================================
+# Job d'ingestion Bronze — Auto Loader, notebooks Scala.
+#
+# ATTENTION (risque documente dans le plan, a valider avant premier deploiement
+# reel) : contrairement a smoke_test.job.yml, ce job declare un job_cluster
+# classique explicite. Les notebooks Scala et Auto Loader n'ont pas de
+# garantie de fonctionner sur le compute serverless de la Free Edition (qui
+# est historiquement oriente Python/SQL) ; il faut confirmer dans l'espace de
+# travail reel que ce type de cluster peut etre provisionne, avant de
+# supprimer ce commentaire.
+# =============================================================================
+
+resources:
+  jobs:
+    bronze_ingestion:
+      name: "ocarina — bronze ingestion"
+      description: >-
+        Auto Loader : copie fidele des fichiers JSONL du volume de landing
+        vers les tables Delta Bronze. Append-only strict — voir
+        notebooks/bronze/00_bronze_common.scala.
+
+      tags:
+        project: ocarina-nexus
+        layer: bronze
+
+      job_clusters:
+        - job_cluster_key: bronze_cluster
+          new_cluster:
+            spark_version: "15.4.x-scala2.12"
+            node_type_id: "Standard_DS3_v2" # a ajuster au type de noeud reellement disponible
+            num_workers: 1
+            data_security_mode: SINGLE_USER
+
+      tasks:
+        - task_key: bronze_zeldawiki
+          job_cluster_key: bronze_cluster
+          notebook_task:
+            notebook_path: ../../notebooks/bronze/01_bronze_zeldawiki.scala
+            base_parameters:
+              catalog: ${var.catalog}
+              landing_volume: ${var.landing_volume}
+
+        - task_key: bronze_technical
+          job_cluster_key: bronze_cluster
+          notebook_task:
+            notebook_path: ../../notebooks/bronze/02_bronze_technical.scala
+            base_parameters:
+              catalog: ${var.catalog}
+              landing_volume: ${var.landing_volume}
+
+        - task_key: bronze_game_text
+          job_cluster_key: bronze_cluster
+          notebook_task:
+            notebook_path: ../../notebooks/bronze/03_bronze_game_text.scala
+            base_parameters:
+              catalog: ${var.catalog}
+              landing_volume: ${var.landing_volume}
+
+        - task_key: bronze_speedrun
+          job_cluster_key: bronze_cluster
+          notebook_task:
+            notebook_path: ../../notebooks/bronze/04_bronze_speedrun.scala
+            base_parameters:
+              catalog: ${var.catalog}
+              landing_volume: ${var.landing_volume}
+
+        - task_key: bronze_external
+          job_cluster_key: bronze_cluster
+          notebook_task:
+            notebook_path: ../../notebooks/bronze/05_bronze_external.scala
+            base_parameters:
+              catalog: ${var.catalog}
+              landing_volume: ${var.landing_volume}
+
+      # Free Edition : max 5 taches de job simultanees pour tout le compte.
+      queue:
+        enabled: true
+
+      max_concurrent_runs: 1

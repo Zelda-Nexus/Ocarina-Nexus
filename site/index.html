@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ocarina Nexus</title>
+<meta name="description" content="Ocarina Nexus — la plus grande bibliothèque de connaissances sur The Legend of Zelda: Ocarina of Time, du jeu original à ses remakes et remasters : un knowledge graph d'Hyrule à explorer, ocarina jouable et galerie interactive à l'appui.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@700&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header>
+  <div class="nav-row">
+    <div class="brand"><img src="assets/img/common/logo.webp" alt=""> Ocarina Nexus</div>
+    <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false">☰</button>
+    <nav>
+      <ul class="links" id="navLinks">
+        <li><a href="#intro">Triforce</a></li>
+        <li><a href="#histoire">Voyage</a></li>
+        <li><a href="#deux-ages">Deux Âges</a></li>
+        <li><a href="#hyrule">Hyrule</a></li>
+        <li><a href="#ocarina">Ocarina</a></li>
+        <li><a href="#combat">Épée &amp; Bouclier</a></li>
+        <li><a href="#edition">Bibliothèque</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<audio id="bgm" src="assets/audio/theme.mp3" loop preload="none"></audio>
+<button class="music-toggle" id="musicToggle" aria-pressed="false">
+  <span class="dot" aria-hidden="true"></span>
+  <span id="musicLabel">Musique coupée</span>
+</button>
+
+<main>
+  <section id="hero">
+    <div class="hero-video-wrap">
+      <video id="heroVideo" autoplay muted loop playsinline preload="auto">
+        <source src="assets/video/hero.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="hero-scrim"></div>
+    <div class="wrap hero-inner">
+      <img class="hero-symbol" src="assets/img/hero/symbol.webp" alt="">
+      <img class="hero-logo" src="assets/img/hero/logo.webp" alt="The Legend of Zelda: Ocarina of Time">
+      <img class="hero-release" src="assets/img/hero/release.webp" alt="Sortie annoncée : 5 novembre 2026">
+      <p class="hero-tagline">« À travers le temps, l'enfant devient héros. »</p>
+      <p class="hero-note">Ocarina Nexus — bibliothèque de connaissances non officielle sur Hyrule, à travers le jeu original et ses remakes. Voir mentions en bas de page.</p>
+      <div class="hero-cta">
+        <a href="#ocarina" class="btn solid">Écouter l'ocarina</a>
+        <a href="#hyrule" class="btn">Explorer Hyrule</a>
+      </div>
+    </div>
+    <div class="scroll-cue"><span>Défiler</span><span class="line"></span></div>
+  </section>
+
+  <section id="intro">
+    <div class="intro-bg"><img src="assets/img/intro/kv-bg.webp" alt=""></div>
+    <div class="intro-scrim"></div>
+    <div class="intro-inner">
+      <div class="intro-lines">
+        <p class="intro-line">À travers le temps,</p>
+        <p class="intro-line">l'enfant</p>
+        <p class="intro-line">devient héros.</p>
+      </div>
+    </div>
+    <div class="intro-gallery" aria-hidden="true">
+      <div><img src="assets/img/intro/scene-01.webp" alt=""></div>
+      <div><img src="assets/img/intro/scene-02.webp" alt=""></div>
+      <div><img src="assets/img/intro/scene-03.webp" alt=""></div>
+      <div><img src="assets/img/intro/scene-04.webp" alt=""></div>
+      <div><img src="assets/img/intro/scene-05.webp" alt=""></div>
+      <div><img src="assets/img/intro/scene-06.webp" alt=""></div>
+    </div>
+  </section>
+
+  <section id="histoire" class="band">
+    <div class="wrap">
+      <div class="head reveal pre">
+        <p class="eyebrow">Chapitre I — Trois vertus scellées</p>
+        <h2>Une légende scellée dans le temps</h2>
+        <p>Quatre fragments du récit, tels qu'Ocarina Nexus les relie entre personnages, lieux et quêtes dans son graphe de connaissances.</p>
+      </div>
+      <div class="carousel" id="storyCarousel">
+        <div class="carousel-track-wrap">
+          <div class="carousel-track">
+            <article class="slide">
+              <div class="slide-art"><video data-autoplay muted loop playsinline preload="metadata"><source src="assets/video/story-01.mp4" type="video/mp4"></video></div>
+              <div class="slide-copy">
+                <span class="eyebrow">Forêt Kokiri</span>
+                <h3>L'enfant sans fée</h3>
+                <p>Élevé parmi les Kokiri sans jamais recevoir de fée gardienne, le jeune héros est réveillé par un cauchemar et convoqué par l'Arbre Mojo, gardien de la forêt.</p>
+              </div>
+            </article>
+            <article class="slide">
+              <div class="slide-art"><video data-autoplay muted loop playsinline preload="metadata"><source src="assets/video/story-02.mp4" type="video/mp4"></video></div>
+              <div class="slide-copy">
+                <span class="eyebrow">Le Royaume Sacré</span>
+                <h3>Trois vertus, trois porteurs</h3>
+                <p>Sagesse, Pouvoir et Courage : un homme du désert convoite la relique tout entière, tandis que le sceau du Temple du Temps attend son heure.</p>
+              </div>
+            </article>
+            <article class="slide">
+              <div class="slide-art"><video data-autoplay muted loop playsinline preload="metadata"><source src="assets/video/story-03.mp4" type="video/mp4"></video></div>
+              <div class="slide-copy">
+                <span class="eyebrow">Le Socle des Âges</span>
+                <h3>Sept années de silence</h3>
+                <p>En retirant l'Épée de Légende trop tôt, l'enfant referme les portes du temps sur lui-même : il se réveille adulte, dans un Hyrule qu'il ne reconnaît plus.</p>
+              </div>
+            </article>
+            <article class="slide">
+              <div class="slide-art"><video data-autoplay muted loop playsinline preload="metadata"><source src="assets/video/story-04.mp4" type="video/mp4"></video></div>
+              <div class="slide-copy">
+                <span class="eyebrow">Deux chemins, un même sort</span>
+                <h3>Réparer ce qui a été rompu</h3>
+                <p>D'un temple à l'autre, de l'enfance à l'âge adulte, le même héros doit désormais réveiller les sages et refermer la faille qu'il a lui-même ouverte.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+        <div class="carousel-controls">
+          <button class="carousel-arrow" data-dir="-1" aria-label="Chapitre précédent">‹</button>
+          <div class="dots" role="tablist" aria-label="Chapitres de l'histoire"></div>
+          <button class="carousel-arrow" data-dir="1" aria-label="Chapitre suivant">›</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="deux-ages" class="band band-alt ages">
+    <div class="ages-duo-bg" aria-hidden="true"><img src="assets/img/age/duo.webp" alt=""></div>
+    <div class="wrap">
+      <div class="head reveal pre">
+        <p class="eyebrow">Chapitre II — Across Two Ages</p>
+        <h2>Un seul héros, deux âges</h2>
+        <p>« Le monde parcouru enfant et celui affronté en adulte : même terre, mondes différents. » Choisis un âge pour comparer.</p>
+      </div>
+      <div class="ages-grid">
+        <div>
+          <div class="age-portrait">
+            <img id="childPortrait" class="active" src="assets/img/age/child.webp" alt="Link enfant, tunique Kokiri">
+            <img id="adultPortrait" src="assets/img/age/adult.webp" alt="Link adulte, Épée de Légende">
+          </div>
+        </div>
+        <div>
+          <div class="age-toggle" role="tablist" aria-label="Choisir l'âge">
+            <button type="button" class="active" data-age="child" role="tab" aria-selected="true">Enfant</button>
+            <button type="button" data-age="adult" role="tab" aria-selected="false">Adulte</button>
+          </div>
+          <p class="age-desc" id="ageDesc">Sans fée pour le guider jusqu'à ce que Navi le trouve, l'enfant Kokiri explore les clairières et les temples à hauteur de racines — vif, discret, sous-estimé.</p>
+          <div class="age-stats">
+            <div class="age-stat"><span class="label">Arme</span><span class="value" id="statWeapon">Épée Kokiri</span></div>
+            <div class="age-stat"><span class="label">Bouclier</span><span class="value" id="statShield">Bouclier Deku</span></div>
+            <div class="age-stat"><span class="label">Terrain</span><span class="value" id="statTerrain">Clairières &amp; racines</span></div>
+            <div class="age-stat"><span class="label">Compagnon</span><span class="value" id="statCompanion">Navi, la fée</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band">
+    <div class="wrap">
+      <div class="head center reveal pre">
+        <p class="eyebrow">Chapitre III — A World On The Brink</p>
+        <h2>Un monde en sursis</h2>
+        <p>Partout à Hyrule, d'étranges bouleversements se propagent. Link affronte l'inconnu avec ingéniosité et courage.</p>
+      </div>
+      <div class="world-grid">
+        <div class="world-card">
+          <img src="assets/img/world/card-01.webp" alt="">
+          <div class="world-card-scrim"></div>
+          <div class="world-card-copy">
+            <span class="eyebrow">Ingéniosité</span>
+            <h3>L'idée avant la force</h3>
+            <p>Portes verrouillées, flammes barrant la route, chemins invisibles — l'objet juste et l'idée juste ouvrent la voie.</p>
+          </div>
+        </div>
+        <div class="world-card">
+          <img src="assets/img/world/card-02.webp" alt="">
+          <div class="world-card-scrim"></div>
+          <div class="world-card-copy">
+            <span class="eyebrow">Enfant &amp; Adulte</span>
+            <h3>Deux regards, un monde</h3>
+            <p>On ne voit pas les mêmes choses, on ne peut pas tout faire. Dans une impasse, il suffit de changer d'époque.</p>
+          </div>
+        </div>
+        <div class="world-card">
+          <img src="assets/img/world/card-03.webp" alt="">
+          <div class="world-card-scrim"></div>
+          <div class="world-card-copy">
+            <span class="eyebrow">L'Ocarina</span>
+            <h3>Un chant pour ouvrir la route</h3>
+            <p>Instrument aux pouvoirs singuliers : sa mélodie plie le temps, ouvre des passages, et touche jusqu'au cœur de ceux qui l'entendent.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="ocarina" class="band">
+    <div class="wrap">
+      <div class="ocarina-grid">
+        <div class="instrument">
+          <svg viewBox="0 0 300 220" role="img" aria-label="Ocarina jouable à six trous">
+            <ellipse cx="150" cy="120" rx="120" ry="76" fill="var(--stone)"/>
+            <ellipse cx="150" cy="120" rx="120" ry="76" fill="none" stroke="var(--line)" stroke-width="1.5"/>
+            <ellipse cx="60" cy="70" rx="18" ry="12" fill="var(--stone)" transform="rotate(-28 60 70)"/>
+            <circle class="hole" data-note="D4" tabindex="0" role="button" aria-label="Trou 1 — Ré" cx="120" cy="98" r="13" fill="var(--ground)"/>
+            <circle class="hole" data-note="F4" tabindex="0" role="button" aria-label="Trou 2 — Fa" cx="155" cy="90" r="13" fill="var(--ground)"/>
+            <circle class="hole" data-note="A4" tabindex="0" role="button" aria-label="Trou 3 — La" cx="190" cy="98" r="13" fill="var(--ground)"/>
+            <circle class="hole" data-note="B4" tabindex="0" role="button" aria-label="Trou 4 — Si" cx="120" cy="140" r="13" fill="var(--ground)"/>
+            <circle class="hole" data-note="D5" tabindex="0" role="button" aria-label="Trou 5 — Ré aigu" cx="155" cy="150" r="13" fill="var(--ground)"/>
+            <circle class="hole" data-note="F5" tabindex="0" role="button" aria-label="Trou 6 — Fa aigu" cx="190" cy="140" r="13" fill="var(--ground)"/>
+          </svg>
+          <p class="note-caption" id="noteCaption">Touche un trou pour jouer une note</p>
+          <div class="ingame-ref">
+            <img src="assets/img/common/ocarina-item.webp" alt="Capture in-game réelle : mélodie jouée sur l'ocarina">
+            <p><strong>Capture in-game (référence)</strong>Dans le jeu, chaque mélodie est un enchaînement de touches — ici le motif A · R · A · L · R affiché à l'écran. Les mélodies ci-contre sont des compositions originales pour cette page.</p>
+          </div>
+        </div>
+        <div>
+          <p class="eyebrow">Chapitre IV — L'instrument du voyage</p>
+          <h2>Compose ton propre chant</h2>
+          <p style="color:var(--ink-dim); margin-top:14px;">Chaque trou joue une note. Ces trois mélodies portent les noms des chants historiques de la série, réécrits ici en compositions originales pour cette page.</p>
+          <div class="melody-row">
+            <button class="melody-btn" id="playLullaby">▶ Berceuse de Zelda</button>
+            <button class="melody-btn" id="playSun">▶ Chant du Soleil</button>
+            <button class="melody-btn" id="playEpona">▶ Chant d'Epona</button>
+          </div>
+          <button class="btn" id="oceMuteBtn" style="margin-top:18px;" aria-pressed="false">🔊 Son actif</button>
+          <p class="ocarina-hint">Compatible clavier (Tab + Entrée sur chaque trou). Ce widget est indépendant du bouton musique de fond.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="combat" class="band band-alt">
+    <img class="combat-watermark" src="assets/img/action/bg.webp" alt="">
+    <div class="wrap">
+      <div class="combat-grid">
+        <div>
+          <p class="eyebrow">Chapitre V — Sword and Shield</p>
+          <h2>Se battre avec discernement</h2>
+          <p style="color:var(--ink-dim); margin-top:14px;">Frapper de l'épée, se couvrir du bouclier, saisir la faille. Lire les mouvements de l'adversaire pour affronter les ennemis les plus coriaces.</p>
+          <div class="combat-list">
+            <div class="combat-item">
+              <svg class="combat-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><circle cx="24" cy="24" r="18"/><path d="M24 6 L24 42 M6 24 L42 24"/></svg>
+              <div><h3>Ciblage actif</h3><p>Verrouiller un adversaire pour orbiter autour de lui et frapper au bon instant.</p></div>
+            </div>
+            <div class="combat-item">
+              <svg class="combat-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M24 6 C34 10 40 12 40 12 C40 28 34 38 24 42 C14 38 8 28 8 12 C8 12 14 10 24 6 Z"/></svg>
+              <div><h3>Parade au bouclier</h3><p>Le bon geste, au bon moment, déstabilise l'assaillant et ouvre la riposte.</p></div>
+            </div>
+            <div class="combat-item">
+              <svg class="combat-icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 24 L40 24 M14 16 L40 24 L14 32"/></svg>
+              <div><h3>Cristaux d'amélioration</h3><p>Arc, boomerang et gantelet gagnent en portée au fil des sages libérés.</p></div>
+            </div>
+          </div>
+        </div>
+        <div class="combat-media">
+          <video data-autoplay muted loop playsinline preload="metadata"><source src="assets/video/action.mp4" type="video/mp4"></video>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="hyrule" class="band">
+    <div class="hyrule-bg"><img src="assets/img/hyrule/kv-01.webp" alt=""></div>
+    <div class="hyrule-bg-scrim"></div>
+    <div class="wrap hyrule-inner">
+      <div class="hyrule-head reveal pre">
+        <p class="eyebrow">Chapitre VI — The Land of Hyrule</p>
+        <h2>Les terres d'Hyrule</h2>
+        <p>Cité rocheuse, village des eaux, forteresse de sable, forêt profonde… Les rencontres, terre après terre, finissent par faire basculer le destin d'Hyrule.</p>
+      </div>
+      <div class="mosaic reveal pre" id="mosaic">
+        <img class="mosaic-base" src="assets/img/hyrule/kv-01.webp" alt="">
+        <img class="mosaic-full" src="assets/img/hyrule/kv-04.webp" alt="Mosaïque des personnages et lieux d'Hyrule">
+        <img class="mosaic-grid" src="assets/img/hyrule/kv-02.webp" alt="" aria-hidden="true">
+        <span class="mosaic-caption">Le peuple d'Hyrule, en un seul regard</span>
+      </div>
+
+      <div class="hyrule-map-block reveal pre" id="hyruleMapBlock">
+        <div class="hyrule-map-head">
+          <p class="eyebrow">Carte interactive</p>
+          <h3>Explore Hyrule, point par point</h3>
+          <p>Ces repères ont la même forme que les lignes de <code>gold.dim_location</code> dans le graphe de connaissances — pour l'instant un aperçu illustratif figé, en attendant un vrai export dynamique du lac de données.</p>
+          <div class="map-era-toggle" role="tablist" aria-label="Choisir l'époque de la carte">
+            <button type="button" class="active" data-map-era="child" role="tab" aria-selected="true">Enfant</button>
+            <button type="button" data-map-era="adult" role="tab" aria-selected="false">Adulte</button>
+          </div>
+        </div>
+        <div class="hyrule-map" id="hyruleMapCanvas">
+          <svg class="hyrule-map-base" aria-hidden="true" viewBox="0 0 100 62.5" preserveAspectRatio="none">
+            <rect x="0" y="0" width="100" height="62.5" fill="var(--ground-2)"/>
+            <ellipse cx="48" cy="26" rx="34" ry="20" fill="var(--stone)" stroke="var(--line)" stroke-width=".5"/>
+            <ellipse cx="28" cy="17" rx="17" ry="11" fill="var(--kokiri)" stroke="var(--line)" stroke-width=".5"/>
+            <ellipse cx="58" cy="9" rx="15" ry="8" fill="var(--mountain)" stroke="var(--line)" stroke-width=".5"/>
+            <ellipse cx="76" cy="15" rx="13" ry="9" fill="var(--water)" stroke="var(--line)" stroke-width=".5"/>
+            <ellipse cx="52" cy="43" rx="17" ry="11" fill="var(--water)" stroke="var(--line)" stroke-width=".5"/>
+            <ellipse cx="15" cy="39" rx="14" ry="10" fill="var(--sand)" stroke="var(--line)" stroke-width=".5"/>
+          </svg>
+          <div class="hyrule-map-markers" id="hyruleMapMarkers"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="edition" class="band">
+    <div class="wrap">
+      <div class="head reveal pre">
+        <p class="eyebrow">Le projet</p>
+        <h2>Ocarina Nexus</h2>
+        <p>La plus grande bibliothèque de connaissances sur Ocarina of Time : un knowledge graph qui relie personnages, lieux, objets et quêtes à travers le jeu original et ses remakes.</p>
+      </div>
+      <div class="edition-panel">
+        <div class="edition-art"><img src="assets/img/product/package.webp" alt="Jaquette du jeu — The Legend of Zelda: Ocarina of Time"></div>
+        <div class="edition-info">
+          <h3>Un graphe, toutes les époques du jeu</h3>
+          <p class="sub">Nintendo 64 · 3DS (Ocarina of Time 3D) · Remake Switch 2</p>
+          <div class="price-rows">
+            <div class="price-row"><span>Couverture</span><span class="amt">3 versions du jeu</span></div>
+            <div class="price-row"><span>Pipeline</span><span class="amt">Bronze → Silver → Gold → Graphe</span></div>
+            <div class="price-row"><span>Statut</span><span class="amt">En construction</span></div>
+          </div>
+          <div class="tags">
+            <span class="tag">Databricks Lakehouse</span>
+            <span class="tag">GraphFrames</span>
+            <span class="tag">Delta Lake</span>
+          </div>
+          <p class="fine-print">Projet communautaire et non officiel, construit à partir de sources publiques (wiki, speedrun.com, Wikidata, décompilation zeldaret/oot). Cette page ne vend rien et ne collecte aucune donnée d'achat.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<div class="map-modal" id="mapModal" hidden>
+  <div class="map-modal-backdrop" id="mapModalBackdrop"></div>
+  <div class="map-modal-panel" role="dialog" aria-modal="true" aria-labelledby="mapModalTitle">
+    <button class="map-modal-close" id="mapModalClose" aria-label="Fermer la fiche">×</button>
+    <p class="eyebrow" id="mapModalEra"></p>
+    <h3 id="mapModalTitle"></h3>
+    <p id="mapModalSummary"></p>
+    <div class="map-modal-3d" id="mapModal3d" hidden>
+      <p class="map-modal-3d-label">Explorer la scène en 3D (noclip.website)</p>
+      <div class="map-modal-3d-tabs" id="mapModal3dTabs"></div>
+      <div class="map-modal-3d-frame" id="mapModal3dFrame"></div>
+    </div>
+    <p class="map-modal-3d-todo" id="mapModal3dTodo" hidden>Aperçu 3D à venir pour ce lieu.</p>
+  </div>
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-grid">
+      <p class="footer-note"><strong>Ocarina Nexus</strong> est un projet communautaire non officiel : une bibliothèque de connaissances (knowledge graph) sur <em>The Legend of Zelda: Ocarina of Time</em>, construite à partir de sources publiques (wiki, speedrun.com, Wikidata/Wikipedia, décompilation zeldaret/oot) et couvrant le jeu original ainsi que ses remakes et remasters. Cette page de présentation reprend la direction artistique et des visuels du site d'annonce Nintendo à titre d'exercice de design ; elle n'est ni éditée ni approuvée par Nintendo. <em>The Legend of Zelda: Ocarina of Time</em> et tous les visuels, vidéos et logos associés restent la propriété de Nintendo Co., Ltd.</p>
+      <div class="footer-next">
+        Prochaines étapes de cette vitrine
+        <ul>
+          <li>Remplacer le logo, la bannière et la jaquette par des visuels propres à Ocarina Nexus</li>
+          <li>Brancher les vraies statistiques du graphe (entités, relations, sources)</li>
+          <li>Explorateur du graphe de connaissances, navigable depuis la page</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Réalisé comme démonstration front-end interactive — usage local uniquement.</span>
+      <span>Version 3 — vitrine reprise pour Ocarina Nexus</span>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

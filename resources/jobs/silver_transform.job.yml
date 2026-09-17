@@ -1,0 +1,91 @@
+# =============================================================================
+# Job de transformation Silver — typage, deduplication, historisation SCD2.
+# Premiere tache : declenche bronze_ingestion via run_job_task, pour pouvoir
+# rejouer Silver seul (sans redeclencher Bronze) en desactivant juste cette
+# tache depuis l'UI/CLI si besoin — Bronze reste la source de rejeu, pas une
+# dependance obligatoire a chaque run.
+# =============================================================================
+
+resources:
+  jobs:
+    silver_transform:
+      name: "ocarina — silver transform"
+      description: >-
+        Typage, deduplication, historisation SCD2 (entites Zelda Wiki) et
+        eclatement des tables techniques/randomizer brutes.
+
+      tags:
+        project: ocarina-nexus
+        layer: silver
+
+      job_clusters:
+        - job_cluster_key: silver_cluster
+          new_cluster:
+            spark_version: "15.4.x-scala2.12"
+            node_type_id: "Standard_DS3_v2" # a ajuster au type de noeud reellement disponible
+            num_workers: 1
+            data_security_mode: SINGLE_USER
+
+      tasks:
+        - task_key: trigger_bronze
+          run_job_task:
+            job_id: ${resources.jobs.bronze_ingestion.id}
+
+        - task_key: silver_entity
+          job_cluster_key: silver_cluster
+          depends_on:
+            - task_key: trigger_bronze
+          notebook_task:
+            notebook_path: ../../notebooks/silver/01_silver_entity.scala
+            base_parameters:
+              catalog: ${var.catalog}
+
+        - task_key: silver_i18n
+          job_cluster_key: silver_cluster
+          depends_on:
+            - task_key: silver_entity
+          notebook_task:
+            notebook_path: ../../notebooks/silver/02_silver_i18n.scala
+            base_parameters:
+              catalog: ${var.catalog}
+
+        - task_key: silver_engine
+          job_cluster_key: silver_cluster
+          depends_on:
+            - task_key: trigger_bronze
+          notebook_task:
+            notebook_path: ../../notebooks/silver/03_silver_engine.scala
+            base_parameters:
+              catalog: ${var.catalog}
+
+        - task_key: silver_randomizer
+          job_cluster_key: silver_cluster
+          depends_on:
+            - task_key: trigger_bronze
+          notebook_task:
+            notebook_path: ../../notebooks/silver/04_silver_randomizer.scala
+            base_parameters:
+              catalog: ${var.catalog}
+
+        - task_key: silver_speedrun
+          job_cluster_key: silver_cluster
+          depends_on:
+            - task_key: trigger_bronze
+          notebook_task:
+            notebook_path: ../../notebooks/silver/05_silver_speedrun.scala
+            base_parameters:
+              catalog: ${var.catalog}
+
+        - task_key: silver_external
+          job_cluster_key: silver_cluster
+          depends_on:
+            - task_key: trigger_bronze
+          notebook_task:
+            notebook_path: ../../notebooks/silver/06_silver_external.scala
+            base_parameters:
+              catalog: ${var.catalog}
+
+      queue:
+        enabled: true
+
+      max_concurrent_runs: 1

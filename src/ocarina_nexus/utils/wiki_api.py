@@ -74,12 +74,23 @@ def get_category_members(category: str, limit: int = 500) -> list[dict]:
     return members
 
 
-def get_page_data(title: str) -> dict | None:
-    """Fetches full page data via action=parse."""
+def get_page_data(title: str, full: bool = False) -> dict | None:
+    """
+    Fetches page data via action=parse.
+
+    `full=False` (default) keeps the original Phase-1 prototype shape
+    (title/html/wikitext/categories), unchanged for `scraper_characters.py`.
+    `full=True` requests the wider prop set the extraction layer needs for
+    Silver (pageid, revid, links, images, sections, templates...).
+    """
+    props = "text|wikitext|categories"
+    if full:
+        props += "|links|images|sections|displaytitle|revid|externallinks|templates"
+
     params = {
         "action": "parse",
         "page": title,
-        "prop": "text|wikitext|categories",
+        "prop": props,
         "redirects": 1,
     }
 
@@ -89,9 +100,58 @@ def get_page_data(title: str) -> dict | None:
         return None
 
     parsed = data["parse"]
-    return {
+    result = {
         "title": parsed.get("title", title),
         "html": parsed.get("text", {}).get("*", ""),
         "wikitext": parsed.get("wikitext", {}).get("*", ""),
         "categories": [c["*"] for c in parsed.get("categories", [])],
     }
+
+    if full:
+        result.update(
+            {
+                "pageid": parsed.get("pageid"),
+                "lastrevid": parsed.get("revid"),
+                "displaytitle": parsed.get("displaytitle"),
+                "hidden_categories": [
+                    c["*"] for c in parsed.get("categories", []) if "hidden" in c
+                ],
+                "links": [
+                    link["*"] for link in parsed.get("links", []) if link.get("ns") == 0
+                ],
+                "images": parsed.get("images", []),
+                "sections": [
+                    {
+                        "level": s.get("level"),
+                        "line": s.get("line"),
+                        "anchor": s.get("anchor"),
+                    }
+                    for s in parsed.get("sections", [])
+                ],
+                "templates": [t["*"] for t in parsed.get("templates", [])],
+                "external_links": parsed.get("externallinks", []),
+            }
+        )
+
+    return result
+
+
+def get_page_touched(title: str) -> str | None:
+    """
+    Fetches the `touched` timestamp (last modification, including template
+    transclusions) via action=query&prop=info — not available from action=parse.
+    """
+    params = {
+        "action": "query",
+        "titles": title,
+        "prop": "info",
+        "redirects": 1,
+    }
+    data = _api_get(params)
+    if not data:
+        return None
+
+    pages = data.get("query", {}).get("pages", {})
+    for page in pages.values():
+        return page.get("touched")
+    return None

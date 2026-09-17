@@ -1,0 +1,64 @@
+# =============================================================================
+# CI d'extraction — separe de databricks.yml (celui-ci deploie l'infra, pas
+# les donnees). Tourne l'extraction Python puis depose le resultat dans le
+# volume de landing UC : GitHub Actions -> extraction, raw JSONL -> Volume,
+# exactement le schema du README.
+#
+# Meme secrets que databricks.yml (DATABRICKS_HOST / DATABRICKS_TOKEN).
+# Optionnel : GITHUB_TOKEN est deja fourni par Actions (ambient), il releve
+# le quota de l'API GitHub a 5000/h automatiquement (voir github_client.py).
+#
+# Planifie hebdomadaire : le contenu (wiki, texte du jeu, tables techniques)
+# est largement statique, pas besoin d'un rafraichissement plus frequent.
+# Upload vers prod reste manuel (workflow_dispatch avec catalog=ocarina_prod).
+# =============================================================================
+
+name: Extraction
+
+on:
+  schedule:
+    - cron: "0 6 * * 1" # lundi 06:00 UTC
+  workflow_dispatch:
+    inputs:
+      catalog:
+        description: "Catalogue UC cible pour l'upload"
+        required: false
+        default: "ocarina_dev"
+
+env:
+  DATABRICKS_HOST: ${{ secrets.DATABRICKS_HOST }}
+  DATABRICKS_TOKEN: ${{ secrets.DATABRICKS_TOKEN }}
+  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+concurrency:
+  group: extraction
+  cancel-in-progress: false
+
+jobs:
+  extract_and_upload:
+    name: Extraction -> volume de landing
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Installer uv
+        uses: astral-sh/setup-uv@v3
+
+      - name: Installer les dependances
+        run: uv sync
+
+      - name: Lancer l'extraction (toutes les sources)
+        run: uv run python -m ocarina_nexus.extraction.cli --source all
+
+      - uses: databricks/setup-cli@main
+
+      - name: Deposer le resultat dans le volume de landing
+        env:
+          CATALOG: ${{ inputs.catalog || 'ocarina_dev' }}
+        run: |
+          for source_dir in data/landing/*/; do
+            source_name=$(basename "$source_dir")
+            databricks fs cp -r --overwrite \
+              "$source_dir" \
+              "dbfs:/Volumes/${CATALOG}/bronze/landing/${source_name}"
+          done

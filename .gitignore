@@ -27,6 +27,10 @@ dist/
 .vscode/
 .idea/
 
+# Raw scraped Nintendo assets (copyrighted, personal reference only — never commit)
+Ocarina Nexus Front Page/
+site/assets/
+
 # Internal notes
 INFORMATION.md
 
