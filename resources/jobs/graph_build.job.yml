@@ -17,41 +17,34 @@ resources:
         project: ocarina-nexus
         layer: gold
 
-      job_clusters:
-        - job_cluster_key: graph_cluster
-          new_cluster:
-            spark_version: "15.4.x-scala2.12"
-            node_type_id: "Standard_DS3_v2" # a ajuster au type de noeud reellement disponible
-            num_workers: 1
-            data_security_mode: SINGLE_USER
-
       tasks:
         - task_key: trigger_gold
           run_job_task:
             job_id: ${resources.jobs.gold_transform.id}
 
         - task_key: graph_build_nodes_edges
-          job_cluster_key: graph_cluster
           depends_on:
             - task_key: trigger_gold
           notebook_task:
-            notebook_path: ../../notebooks/graph/01_graph_build_nodes_edges.scala
+            notebook_path: ../../notebooks/graph/01_graph_build_nodes_edges.py
             base_parameters:
               catalog: ${var.catalog}
 
         - task_key: graph_algorithms
-          job_cluster_key: graph_cluster
           depends_on:
             - task_key: graph_build_nodes_edges
           notebook_task:
-            notebook_path: ../../notebooks/graph/02_graph_algorithms.scala
+            notebook_path: ../../notebooks/graph/02_graph_algorithms.py
             base_parameters:
               catalog: ${var.catalog}
-          libraries:
-            - maven:
-                coordinates: "graphframes:graphframes:0.8.4-spark3.5-s_2.12" # version a confirmer contre le runtime reel du cluster
 
       queue:
         enabled: true
 
       max_concurrent_runs: 1
+
+      # Le service principal de l'App lakehouse (app/) peut monitorer et
+      # relancer ce job depuis /pipelines, jamais en editer la definition.
+      permissions:
+        - level: CAN_MANAGE_RUN
+          service_principal_name: ${var.app_service_principal_id}

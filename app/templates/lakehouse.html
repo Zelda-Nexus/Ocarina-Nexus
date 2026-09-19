@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ocarina Nexus — Requêtes SQL</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="/">Ocarina Nexus <span class="brand-sub">lakehouse</span></a>
+    <nav>
+      <a href="/" class="nav-link">Statistiques</a>
+      <a href="/lakehouse" class="nav-link active">Requêtes SQL</a>
+      <a href="/pipelines" class="nav-link">Pipelines</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap wrap-wide">
+  <h1>Interroger le lakehouse</h1>
+  <p class="lede">
+    Lecture seule — <code>SELECT</code> / <code>WITH</code> uniquement, une instruction à la fois,
+    résultat plafonné à 500 lignes. Catalogue par défaut : <code>ocarina_dev</code>.
+  </p>
+
+  <div class="lakehouse-layout">
+    <aside class="catalog-sidebar" aria-label="Tables du catalogue">
+      <div class="catalog-head">Tables</div>
+      <div id="catalogTree" aria-live="polite"><p class="muted">Chargement…</p></div>
+    </aside>
+
+    <div class="lakehouse-main">
+      <div id="tableDetail" hidden></div>
+
+      <div class="examples">
+        <span class="muted">Exemples :</span>
+        <button type="button" class="chip" data-sql="SELECT * FROM gold.dim_entity LIMIT 20">dim_entity</button>
+        <button type="button" class="chip" data-sql="SELECT relation_type, count(*) AS n FROM gold.graph_edges GROUP BY relation_type ORDER BY n DESC">relations par type</button>
+        <button type="button" class="chip" data-sql="SELECT title, entity_types FROM gold.graph_nodes WHERE title LIKE '%Ganon%'">recherche par titre</button>
+      </div>
+
+      <form id="queryForm">
+        <textarea id="sqlInput" spellcheck="false" placeholder="SELECT * FROM gold.dim_entity LIMIT 20" rows="6">SELECT * FROM gold.dim_entity LIMIT 20</textarea>
+        <div class="form-row">
+          <button type="submit" id="runBtn">Exécuter</button>
+          <span id="queryStatus" class="muted" aria-live="polite"></span>
+        </div>
+      </form>
+
+      <div id="resultWrap"></div>
+    </div>
+  </div>
+</main>
+
+<script src="/static/lakehouse.js"></script>
+</body>
+</html>

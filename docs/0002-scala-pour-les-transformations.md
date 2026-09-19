@@ -1,6 +1,8 @@
 # ADR 0002 — Scala pour les transformations Silver/Gold
 
-- **Statut :** accepté
+- **Statut :** remplacé par [ADR 0004](0004-pyspark-serverless-remplace-scala-et-graphframes.md) (2026-09-19) — le
+  compute serverless du workspace cible ne supporte pas Scala, decouvert au
+  premier deploiement reel des jobs, apres cet ADR
 - **Date :** 2026-09-11
 - **Décideur :** Adam Kharfi
 

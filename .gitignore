@@ -8,8 +8,10 @@ pyproject.toml.bak
 # Virtual environment
 .venv/
 
-# Generated data (reproducible via the pipeline)
-data/
+# Generated data (reproducible via the pipeline) — anchored to the repo root,
+# not "data/" anywhere, which would also swallow site/data/locations.json
+# (the static site's export, meant to be committed).
+/data/
 logs/
 
 # Database
@@ -27,9 +29,20 @@ dist/
 .vscode/
 .idea/
 
+# LLM
+.claude
+
 # Raw scraped Nintendo assets (copyrighted, personal reference only — never commit)
 Ocarina Nexus Front Page/
-site/assets/
+# ...except the interactive map (original artwork generated for this project, not scraped) —
+# git can't re-include a file under an ignored *directory*, so the exclusion has to stop one
+# level short and get reapplied at each level instead of a single "site/assets/" line.
+site/assets/*
+!site/assets/img
+site/assets/img/*
+!site/assets/img/hyrule
+site/assets/img/hyrule/*
+!site/assets/img/hyrule/hyrule-map.svg
 
 # Internal notes
 INFORMATION.md

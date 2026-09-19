@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cinzel+Decorative:wght@700&family=Spectral:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/hyrule-map.css">
 </head>
 <body>
 
@@ -285,28 +286,15 @@
         <span class="mosaic-caption">Le peuple d'Hyrule, en un seul regard</span>
       </div>
 
-      <div class="hyrule-map-block reveal pre" id="hyruleMapBlock">
+      <div class="hyrule-map-block reveal pre">
         <div class="hyrule-map-head">
           <p class="eyebrow">Carte interactive</p>
           <h3>Explore Hyrule, point par point</h3>
-          <p>Ces repères ont la même forme que les lignes de <code>gold.dim_location</code> dans le graphe de connaissances — pour l'instant un aperçu illustratif figé, en attendant un vrai export dynamique du lac de données.</p>
-          <div class="map-era-toggle" role="tablist" aria-label="Choisir l'époque de la carte">
-            <button type="button" class="active" data-map-era="child" role="tab" aria-selected="true">Enfant</button>
-            <button type="button" data-map-era="adult" role="tab" aria-selected="false">Adulte</button>
-          </div>
+          <p>Chaque repère est une ligne de <code>gold.dim_location</code>. Ouvre-en un
+             pour lire sa fiche et te promener dans la scène telle qu'elle existe dans la
+             ROM, en version Nintendo 64 ou 3DS.</p>
         </div>
-        <div class="hyrule-map" id="hyruleMapCanvas">
-          <svg class="hyrule-map-base" aria-hidden="true" viewBox="0 0 100 62.5" preserveAspectRatio="none">
-            <rect x="0" y="0" width="100" height="62.5" fill="var(--ground-2)"/>
-            <ellipse cx="48" cy="26" rx="34" ry="20" fill="var(--stone)" stroke="var(--line)" stroke-width=".5"/>
-            <ellipse cx="28" cy="17" rx="17" ry="11" fill="var(--kokiri)" stroke="var(--line)" stroke-width=".5"/>
-            <ellipse cx="58" cy="9" rx="15" ry="8" fill="var(--mountain)" stroke="var(--line)" stroke-width=".5"/>
-            <ellipse cx="76" cy="15" rx="13" ry="9" fill="var(--water)" stroke="var(--line)" stroke-width=".5"/>
-            <ellipse cx="52" cy="43" rx="17" ry="11" fill="var(--water)" stroke="var(--line)" stroke-width=".5"/>
-            <ellipse cx="15" cy="39" rx="14" ry="10" fill="var(--sand)" stroke="var(--line)" stroke-width=".5"/>
-          </svg>
-          <div class="hyrule-map-markers" id="hyruleMapMarkers"></div>
-        </div>
+        <div class="hymap" data-src="data/locations.json" data-era="child"></div>
       </div>
     </div>
   </section>
@@ -326,35 +314,25 @@
           <div class="price-rows">
             <div class="price-row"><span>Couverture</span><span class="amt">3 versions du jeu</span></div>
             <div class="price-row"><span>Pipeline</span><span class="amt">Bronze → Silver → Gold → Graphe</span></div>
-            <div class="price-row"><span>Statut</span><span class="amt">En construction</span></div>
+            <div class="price-row"><span>Statut</span><span class="amt">Graphe peuplé — vitrine en construction</span></div>
           </div>
           <div class="tags">
             <span class="tag">Databricks Lakehouse</span>
-            <span class="tag">GraphFrames</span>
+            <span class="tag">PySpark</span>
             <span class="tag">Delta Lake</span>
           </div>
           <p class="fine-print">Projet communautaire et non officiel, construit à partir de sources publiques (wiki, speedrun.com, Wikidata, décompilation zeldaret/oot). Cette page ne vend rien et ne collecte aucune donnée d'achat.</p>
+          <div class="lakehouse-cta">
+            <a class="btn solid" href="https://ocarina-lakehouse-7474646415670671.aws.databricksapps.com/" target="_blank" rel="noopener">Voir les statistiques réelles du graphe →</a>
+            <a class="btn" href="https://ocarina-lakehouse-7474646415670671.aws.databricksapps.com/lakehouse" target="_blank" rel="noopener">Interroger le lakehouse en SQL →</a>
+            <a class="btn" href="https://ocarina-lakehouse-7474646415670671.aws.databricksapps.com/pipelines" target="_blank" rel="noopener">Monitorer les pipelines →</a>
+          </div>
+          <p class="fine-print">Ces liens ouvrent l'App Databricks (authentification workspace requise — c'est le même compte que celui utilisé pour déployer le projet).</p>
         </div>
       </div>
     </div>
   </section>
 </main>
-
-<div class="map-modal" id="mapModal" hidden>
-  <div class="map-modal-backdrop" id="mapModalBackdrop"></div>
-  <div class="map-modal-panel" role="dialog" aria-modal="true" aria-labelledby="mapModalTitle">
-    <button class="map-modal-close" id="mapModalClose" aria-label="Fermer la fiche">×</button>
-    <p class="eyebrow" id="mapModalEra"></p>
-    <h3 id="mapModalTitle"></h3>
-    <p id="mapModalSummary"></p>
-    <div class="map-modal-3d" id="mapModal3d" hidden>
-      <p class="map-modal-3d-label">Explorer la scène en 3D (noclip.website)</p>
-      <div class="map-modal-3d-tabs" id="mapModal3dTabs"></div>
-      <div class="map-modal-3d-frame" id="mapModal3dFrame"></div>
-    </div>
-    <p class="map-modal-3d-todo" id="mapModal3dTodo" hidden>Aperçu 3D à venir pour ce lieu.</p>
-  </div>
-</div>
 
 <footer>
   <div class="wrap">
@@ -364,8 +342,10 @@
         Prochaines étapes de cette vitrine
         <ul>
           <li>Remplacer le logo, la bannière et la jaquette par des visuels propres à Ocarina Nexus</li>
-          <li>Brancher les vraies statistiques du graphe (entités, relations, sources)</li>
-          <li>Explorateur du graphe de connaissances, navigable depuis la page</li>
+          <li class="done">Vraies statistiques du graphe (entités, relations, sources) — <a href="https://ocarina-lakehouse-7474646415670671.aws.databricksapps.com/" target="_blank" rel="noopener">voir le tableau de bord ↗</a></li>
+          <li class="done">Interface de requêtage SQL + catalogue (tables, clés) sur le lakehouse — <a href="https://ocarina-lakehouse-7474646415670671.aws.databricksapps.com/lakehouse" target="_blank" rel="noopener">l'ouvrir ↗</a></li>
+          <li class="done">Monitoring et déclenchement des pipelines — <a href="https://ocarina-lakehouse-7474646415670671.aws.databricksapps.com/pipelines" target="_blank" rel="noopener">l'ouvrir ↗</a></li>
+          <li class="done">Explorateur du graphe de connaissances, navigable depuis la page (carte interactive + scènes 3D noclip.website ci-dessus)</li>
         </ul>
       </div>
     </div>
@@ -377,5 +357,6 @@
 </footer>
 
 <script src="js/main.js"></script>
+<script src="js/hyrule-map.js"></script>
 </body>
 </html>

@@ -1,0 +1,22 @@
+# =============================================================================
+# Databricks App — stats reelles du graphe (page d'accueil) + interface de
+# requetage SQL en lecture seule sur le lakehouse (page /lakehouse).
+#
+# Code source : app/ (FastAPI, aucune dependance JS/npm — coherent avec le
+# reste du projet). Le warehouse SQL est attache comme ressource nommee
+# "sql_warehouse" ; app/app.yaml lit son id via valueFrom.
+# =============================================================================
+
+resources:
+  apps:
+    lakehouse_app:
+      name: "ocarina-lakehouse"
+      description: >-
+        Statistiques reelles du graphe de connaissances et interface de
+        requetage SQL en lecture seule sur le lakehouse ocarina_dev.
+      source_code_path: ../../app
+      resources:
+        - name: "sql_warehouse"
+          sql_warehouse:
+            id: ${var.warehouse_id}
+            permission: "CAN_USE"

@@ -1,6 +1,10 @@
 # ADR 0003 — GraphFrames sur Delta pour le graphe de connaissances
 
-- **Statut :** accepté
+- **Statut :** amendé par [ADR 0004](0004-pyspark-serverless-remplace-scala-et-graphframes.md) (2026-09-19) — la
+  dependance Maven de GraphFrames ne peut s'attacher a aucun cluster sur le
+  compute serverless du workspace cible ; PageRank et composantes connexes
+  sont recalcules en PySpark pur. Le choix Delta comme format de stockage du
+  graphe (`gold.graph_nodes` / `gold.graph_edges`), lui, ne change pas.
 - **Date :** 2026-09-11
 - **Décideur :** Adam Kharfi
 

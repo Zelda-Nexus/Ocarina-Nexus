@@ -16,6 +16,7 @@ bundle:
 include:
   - resources/*.yml
   - resources/jobs/*.yml
+  - resources/apps/*.yml
 
 # -----------------------------------------------------------------------------
 # Variables : tout ce qui change entre dev et prod passe par ici.
@@ -29,6 +30,17 @@ variables:
   landing_volume:
     description: "Volume UC ou GitHub Actions depose les fichiers bruts"
     default: /Volumes/ocarina_dev/bronze/landing
+
+  warehouse_id:
+    description: "SQL Warehouse serverless utilise par l'App (stats + lakehouse SQL)"
+    default: 49f98d366056a749
+
+  app_service_principal_id:
+    description: >-
+      Application id du service principal de l'App lakehouse (databricks apps get
+      ocarina-lakehouse -> service_principal_client_id). Doit rester en phase avec
+      resources/apps/lakehouse_app.yml ; permet a l'App de monitorer/lancer les jobs.
+    default: 204c06a3-380c-437a-bcd0-8d133284ca3f
 
 # -----------------------------------------------------------------------------
 # Cibles de deploiement.

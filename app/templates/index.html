@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ocarina Nexus — Lakehouse</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="/">Ocarina Nexus <span class="brand-sub">lakehouse</span></a>
+    <nav>
+      <a href="/" class="nav-link active">Statistiques</a>
+      <a href="/lakehouse" class="nav-link">Requêtes SQL</a>
+      <a href="/pipelines" class="nav-link">Pipelines</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>Le graphe de connaissances, en chiffres</h1>
+  <p class="lede">Comptages calculés en direct sur <code>ocarina_dev.gold</code> — pas de valeurs figées.</p>
+
+  <section class="tiles" id="tiles" aria-live="polite">
+    <div class="tile skeleton"><span class="tile-label">Entités</span><span class="tile-value">—</span></div>
+    <div class="tile skeleton"><span class="tile-label">Relations</span><span class="tile-value">—</span></div>
+    <div class="tile skeleton"><span class="tile-label">Sources</span><span class="tile-value">—</span></div>
+    <div class="tile skeleton"><span class="tile-label">Types de relation</span><span class="tile-value">—</span></div>
+  </section>
+
+  <section class="panel">
+    <h2>Relations par type</h2>
+    <div id="relationBars" class="bars" aria-live="polite">
+      <p class="muted">Chargement…</p>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Entités les mieux connectées (PageRank)</h2>
+    <table class="data-table" id="topEntitiesTable">
+      <thead><tr><th>Entité</th><th>Type</th><th>PageRank</th></tr></thead>
+      <tbody><tr><td colspan="3" class="muted">Chargement…</td></tr></tbody>
+    </table>
+  </section>
+
+  <p class="footnote">
+    Calculé par un job GraphFrames-free en PySpark (voir <code>notebooks/graph/</code>) —
+    <a href="/lakehouse">interroger le lakehouse directement →</a>
+  </p>
+</main>
+
+<script src="/static/stats.js"></script>
+</body>
+</html>

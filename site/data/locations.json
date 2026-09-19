@@ -1,0 +1,655 @@
+{
+  "map": {
+    "src": "assets/img/hyrule/hyrule-map.svg",
+    "viewBox": [
+      1000,
+      640
+    ]
+  },
+  "noclip": {
+    "base": "https://noclip.website",
+    "groups": {
+      "n64": "Nintendo 64",
+      "oot3d": "Nintendo 3DS"
+    }
+  },
+  "locations": [
+    {
+      "entity_id": "bottom_of_the_well",
+      "name": "Bottom of the Well",
+      "region": "Bottom of the Well",
+      "era": [
+        "child"
+      ],
+      "x": 65.6,
+      "y": 35.938,
+      "summary": "The Bottom of the Well is a mini-dungeon in Ocarina of Time.  It is located in Kakariko Village, more specifically at the bottom of the Well of Three Features.  It consists of an underground chamber that guards the Lens of Truth. On the whole, this Dungeon is optional, having no effect on the main quest if not attempted. However, without the Lens of Truth, places such as the Haunted Wasteland, the Spirit Temple, the Shadow Temple, and Ganon's Castle will be more difficult to navigate. Also, Link may miss out on many treasures hidden throughout Hyrule that only the Lens of Truth can uncover.",
+      "scenes": {
+        "child": {
+          "n64": "zelview/HAKAdan_scene",
+          "oot3d": "oot3d/hakadan"
+        }
+      }
+    },
+    {
+      "entity_id": "death_mountain_crater",
+      "name": "Death Mountain Crater",
+      "region": "Hyrule",
+      "era": [
+        "adult",
+        "child"
+      ],
+      "x": 85.2,
+      "y": 11.563,
+      "summary": "The Death Mountain Crater is a recurring location in The Legend of Zelda series.   [ name references needed ] The Death Mountain Crater goes unnamed in Breath of the Wild.",
+      "scenes": {
+        "child": {
+          "n64": "zelview/spot17_scene",
+          "oot3d": "oot3d/spot17"
+        },
+        "adult": {
+          "n64": "zelview/spot17_scene",
+          "oot3d": "oot3d/spot17"
+        }
+      }
+    },
+    {
+      "entity_id": "death_mountain_trail",
+      "name": "Death Mountain Trail",
+      "region": "Hyrule",
+      "era": [
+        "adult",
+        "child"
+      ],
+      "x": 79.2,
+      "y": 26.25,
+      "summary": "Death Mountain Trail is a recurring location in The Legend of Zelda series.",
+      "scenes": {
+        "child": {
+          "n64": "zelview/spot16_scene",
+          "oot3d": "oot3d/spot16"
+        },
+        "adult": {
+          "n64": "zelview/spot16_scene",
+          "oot3d": "oot3d/spot16"
+        }
+      }
+    },
+    {
+      "entity_id": "deku_tree",
+      "name": "Deku Tree",
+      "region": "Hyrule",
+      "era": [
+        "child"
+      ],
+      "x": 83.6,
+      "y": 66.875,
+      "summary": "The Deku Tree, also known as the Great Deku Tree, is a recurring character in The Legend of Zelda series. He is the fatherly guardian of the forest who safeguards not only the dense land around him, but the small population of beings that live in his shadow. In Ocarina of Time, the Kokiri praise and worship the massive tree, sharing a home in the Kokiri Forest, while in The Wind Waker, these beings are the Koroks, timid wood creatures who live collaboratively with the talking tree in the Forest Haven.",
+      "scenes": {
+        "child": {
+          "n64": "zelview/ydan_scene",
+          "oot3d": "oot3d/ydan"
+        }
+      }
+    },
+    {
+      "entity_id": "desert_colossus",
+      "name": "Desert Colossus",
+      "region": "Desert Colossus",
+      "era": [
+        "adult"
+      ],
+      "x": 15.2,
+      "y": 32.5,
+      "summary": "The Desert Colossus is a location in Ocarina of Time. It is also the name of a similar statue inside of the Spirit Temple. ",
+      "scenes": {
+        "adult": {
+          "n64": "zelview/spot11_scene",
+          "oot3d": "oot3d/spot11"
+        }
+      }
+    },
+    {
+      "entity_id": "dodongos_cavern",
+      "name": "Dodongo's Cavern",
+      "region": "Hyrule",
+      "era": [
+        "child"
+      ],
+      "x": 76.0,
+      "y": 18.125,
+      "summary": "Dodongo's Cavern is a Dungeon in Ocarina of Time.  It is the second of three dungeons that child Link must visit in order to acquire the three Spiritual Stones. It also has a great amount of rocks in it that the Gorons that live nearby eat, and it is used for mining food for them. ",
+      "scenes": {
+        "child": {
+          "n64": "zelview/ddan_scene",
+          "oot3d": "oot3d/ddan"
+        }
+      }
+    },
+    {
+      "entity_id": "fire_temple",
+      "name": "Fire Temple",
+      "region": "Hyrule",
+      "era": [
+        "adult"
+      ],
+      "x": 89.6,
+      "y": 16.875,
+      "summary": "The Fire Temple, ( OoT Ocarina of Time | ST Spirit Tracks | TFH Tri Force Heroes | TotK Tears of the Kingdom )   also known as the Mountain Temple, ( ST Spirit Tracks ) [ citation needed ] is a recurring Dungeon in The Legend of Zelda series.",
+      "scenes": {
+        "adult": {
+          "n64": "zelview/HIDAN_scene",
+          "oot3d": "oot3d/hidan"
+        }
+      }
+    },
+    {
+      "entity_id": "forest_temple",
+      "name": "Forest Temple",
+      "region": "Hyrule",
+      "era": [
+        "adult"
+      ],
+      "x": 95.0,
+      "y": 50.938,
+      "summary": "The Forest Temple is a recurring Dungeon and location in The Legend of Zelda series.",
+      "scenes": {
+        "adult": {
+          "n64": "zelview/Bmori1_scene",
+          "oot3d": "oot3d/bmori1"
+        }
+      }
+    },
+    {
+      "entity_id": "gerudo_valley",
+      "name": "Gerudo Valley",
+      "region": "Gerudo Valley",
+      "era": [
+        "adult",
+        "child"
+      ],
+      "x": 30.0,
+      "y": 50.625,
+      "summary": "Gerudo Valley is a recurring location in The Legend of Zelda series.",
+      "scenes": {
+        "child": {
+          "n64": "zelview/spot09_scene",
+          "oot3d": "oot3d/spot09"
+        },
+        "adult": {
+          "n64": "zelview/spot09_scene",
+          "oot3d": "oot3d/spot09"
+        }
+      }
+    },
+    {
+      "entity_id": "gerudos_fortress",
+      "name": "Gerudo's Fortress",
+      "region": "Hyrule",
+      "era": [
+        "adult"
+      ],
+      "x": 21.4,
+      "y": 41.875,
+      "summary": "Gerudo's Fortress is a location in Ocarina of Time. ",
+      "scenes": {
+        "adult": {
+          "n64": "zelview/spot12_scene",
+          "oot3d": "oot3d/spot12"
+        }
+      }
+    },
+    {
+      "entity_id": "goron_city",
+      "name": "Goron City",
+      "region": "Goron City",
+      "era": [
+        "adult",
+        "child"
+      ],
+      "x": 83.0,
+      "y": 20.0,
+      "summary": "Goron City, ( OoT Ocarina of Time | BotW Breath of the Wild | TotK Tears of the Kingdom | EoW Echoes of Wisdom | AoC Age of Calamity )      also known as the Home of the Gorons, ( OoT Ocarina of Time )  is a recurring location in The Legend of Zelda series. It is the home of the Goron Tribe.  It is located nearby Death Mountain.",
+      "scenes": {
+        "child": {
+          "n64": "zelview/spot18_scene",
+          "oot3d": "oot3d/spot18"
+        },
+        "adult": {
+          "n64": "zelview/spot18_scene",
+          "oot3d": "oot3d/spot18"
+        }
+      }
+    },
+    {
+      "entity_id": "graveyard",
+      "name": "Graveyard",
+      "region": "Graveyard",
+      "era": [
+        "adult",
+        "child"
+      ],
+      "x": 72.8,
+      "y": 33.125,
+      "summary": "Graveyards, also known as Cemeteries, are recurring locations in The Legend of Zelda series. [ name references needed ] They are locations where the deceased are buried, often in tombs with marked headstones. They are frequently haunted by ghosts and other undead enemies.",
+      "scenes": {
+        "child": {
+          "n64": "zelview/spot02_scene",
+          "oot3d": "oot3d/spot02"
+        },
+        "adult": {
+          "n64": "zelview/spot02_scene",
+          "oot3d": "oot3d/spot02"
+        }
+      }
+    },
+    {
+      "entity_id": "haunted_wasteland",
+      "name": "Haunted Wasteland",
+      "region": "Haunted Wasteland",
+      "era": [
+        "adult"
+      ],
+      "x": 12.2,
+      "y": 46.875,
+      "summary": "The Haunted Wasteland is a location in Ocarina of Time. ",
+      "scenes": {
+        "adult": {
+          "n64": "zelview/spot13_scene",
+          "oot3d": "oot3d/spot13"
+        }
+      }
+    },
+    {
+      "entity_id": "hyrule_castle",
+      "name": "Hyrule Castle",
+      "region": "Hyrule",
+      "era": [
+        "adult",
+        "child"
+      ],
+      "x": 47.0,
+      "y": 27.5,
+      "summary": "Hyrule Castle, also known as the Castle of Hyrule, is a recurring location in The Legend of Zelda series. It is the seat of Hyrule 's monarchical government and the home of the Royal Family of Hyrule, which usually includes Princess Zelda and the normally unseen King of Hyrule. The Castle first debuted in A Link to the Past, the third game in the series. Each game that contains Hyrule Castle features a different layout. Near the Castle is Hyrule Castle Town, which serves as the city's marketplace where Hyruleans come to engage in business and trade. ",
+      "scenes": {
+        "child": {
+          "n64": "zelview/spot15_scene",
+          "oot3d": "oot3d/spot15"
+        },
+        "adult": {
+          "n64": "zelview/ganon_tou_scene",
+          "oot3d": "oot3d/ganon_tou"
+        }
+      }
+    },
+    {
+      "entity_id": "hyrule_field",
+      "name": "Hyrule Field",
+      "region": "Hyrule Field",
+      "era": [
+        "adult",
+        "child"
+      ],
+      "x": 60.0,
+      "y": 51.875,
+      "summary": "Hyrule Field is a recurring large, grassy area of Hyrule in The Legend of Zelda series.",
+      "scenes": {
+        "child": {
+          "n64": "zelview/spot00_scene",
+          "oot3d": "oot3d/spot00"
+        },
+        "adult": {
+          "n64": "zelview/spot00_scene",
+          "oot3d": "oot3d/spot00"
+        }
+      }
+    },
+    {
+      "entity_id": "ice_cavern",
+      "name": "Ice Cavern",
+      "region": "Hyrule",
+      "era": [
+        "adult"
+      ],
+      "x": 95.2,
+      "y": 29.063,
+      "summary": "The Ice Cavern is a recurring location and Dungeon in The Legend of Zelda series.",
+      "scenes": {
+        "adult": {
+          "n64": "zelview/ice_doukutu_scene",
+          "oot3d": "oot3d/ice_doukutu"
+        }
+      }
+    },
+    {
+      "entity_id": "inside_jabu_jabus_belly",
+      "name": "Inside Jabu-Jabu's Belly",
+      "region": "Hyrule",
+      "era": [
+        "child"
+      ],
+      "x": 94.4,
+      "y": 16.563,
+      "summary": "Inside Jabu-Jabu's Belly,  also known as Lord Jabu-Jabu's Belly,  is the third Dungeon in Ocarina of Time.",
+      "scenes": {
+        "child": {
+          "n64": "zelview/bdan_scene",
+          "oot3d": "oot3d/bdan"
+        }
+      }
+    },
+    {
+      "entity_id": "kakariko_village",
+      "name": "Kakariko Village",
+      "region": "Kakariko Village",
+      "era": [
+        "adult",
+        "child"
+      ],
+      "x": 68.6,
+      "y": 39.063,
+      "summary": "Kakariko Village, also known as Kakariko Town and the Peaceful Village, is a recurring location in The Legend of Zelda series. Its geographical and historical situation seems to change in each game. It may have been inspired by various towns in The Adventure of Link and, in turn, may have served as the inspiration for such future towns in the series – Mabe Village, Clock Town, Lynna City, Horon Village, Windfall Island, Hyrule Town, and various minor villages.",
+      "scenes": {
+        "child": {
+          "n64": "zelview/spot01_scene",
+          "oot3d": "oot3d/spot01"
+        },
+        "adult": {
+          "n64": "zelview/spot01_scene",
+          "oot3d": "oot3d/spot01"
+        }
+      }
+    },
+    {
+      "entity_id": "kokiri_forest",
+      "name": "Kokiri Forest",
+      "region": "Kokiri Forest",
+      "era": [
+        "adult",
+        "child"
+      ],
+      "x": 79.7,
+      "y": 71.406,
+      "summary": "The Kokiri Forest, also known as the Deep Forest, is a recurring location in The Legend of Zelda series.",
+      "scenes": {
+        "child": {
+          "n64": "zelview/spot04_scene",
+          "oot3d": "oot3d/spot04"
+        },
+        "adult": {
+          "n64": "zelview/spot04_scene",
+          "oot3d": "oot3d/spot04"
+        }
+      }
+    },
+    {
+      "entity_id": "lake_hylia",
+      "name": "Lake Hylia",
+      "region": "Lake Hylia",
+      "era": [
+        "adult",
+        "child"
+      ],
+      "x": 45.2,
+      "y": 80.313,
+      "summary": "Lake Hylia, also known as the Great Lake, is a recurring location in The Legend of Zelda series. It is the largest body of water in Hyrule and is commonly guarded by the Zora people.  Lake Hylia is usually home to an underwater temple that is guarded by the Zoras.  ",
+      "scenes": {
+        "child": {
+          "n64": "zelview/spot06_scene",
+          "oot3d": "oot3d/spot06"
+        },
+        "adult": {
+          "n64": "zelview/spot06_scene",
+          "oot3d": "oot3d/spot06"
+        }
+      }
+    },
+    {
+      "entity_id": "lakeside_laboratory",
+      "name": "Lakeside Laboratory",
+      "region": "Hyrule",
+      "era": [
+        "adult",
+        "child"
+      ],
+      "x": 55.2,
+      "y": 72.813,
+      "summary": "The Lakeside Laboratory is a location in Ocarina of Time.  Located in the shores of Lake Hylia, it is home to a Lake Scientist who tries to resolve the lake's many mysteries. ",
+      "scenes": {
+        "child": {
+          "n64": "zelview/hylia_labo_scene",
+          "oot3d": "oot3d/hylia_labo"
+        },
+        "adult": {
+          "n64": "zelview/hylia_labo_scene",
+          "oot3d": "oot3d/hylia_labo"
+        }
+      }
+    },
+    {
+      "entity_id": "lon_lon_ranch",
+      "name": "Lon Lon Ranch",
+      "region": "Lon Lon Ranch",
+      "era": [
+        "adult",
+        "child"
+      ],
+      "x": 41.6,
+      "y": 58.438,
+      "summary": "Lon Lon Ranch, also known as Ingo's Ranch, is a recurring location in The Legend of Zelda series. The Ranch belongs to Malon and her father Talon, and is most famous for selling Lon Lon Milk.   ",
+      "scenes": {
+        "child": {
+          "n64": "zelview/spot20_scene",
+          "oot3d": "oot3d/spot20"
+        },
+        "adult": {
+          "n64": "zelview/spot20_scene",
+          "oot3d": "oot3d/spot20"
+        }
+      }
+    },
+    {
+      "entity_id": "lost_woods",
+      "name": "Lost Woods",
+      "region": "Lost Woods",
+      "era": [
+        "adult",
+        "child"
+      ],
+      "x": 74.2,
+      "y": 81.25,
+      "summary": "The Lost Woods, ( TLoZ The Legend of Zelda | ALttP A Link to the Past | OoT Ocarina of Time | MM Majora's Mask | OoS Oracle of Seasons | FSA Four Swords Adventures | ST Spirit Tracks | ALBW A Link Between Worlds | BotW Breath of the Wild | AoC Age of Calamity )      also known as the Deep, Dark Forest, ( CoH Cadence of Hyrule )  is a maze-like area of a confusing forest that has made several appearances throughout The Legend of Zelda series. Its layout is usually designed to make anyone who enters to become irreversibly lost, and the only way to exit the forest is by navigating it in specific directions. In certain games, it is said that if people wander in the forest for too long, they can turn into a monster such as a Skull Kid,  a Stalfos,   or a Deku Scrub. ",
+      "scenes": {
+        "child": {
+          "n64": "zelview/spot10_scene",
+          "oot3d": "oot3d/spot10"
+        },
+        "adult": {
+          "n64": "zelview/spot10_scene",
+          "oot3d": "oot3d/spot10"
+        }
+      }
+    },
+    {
+      "entity_id": "market",
+      "name": "Market",
+      "region": "Market",
+      "era": [
+        "adult",
+        "child"
+      ],
+      "x": 48.0,
+      "y": 33.438,
+      "summary": "The Market, also known as the Hyrule Castle Town Market, is a location in Ocarina of Time.",
+      "scenes": {
+        "child": {
+          "oot3d": "oot3d/market_day"
+        },
+        "adult": {
+          "oot3d": "oot3d/market_ruins"
+        }
+      }
+    },
+    {
+      "entity_id": "sacred_forest_meadow",
+      "name": "Sacred Forest Meadow",
+      "region": "Sacred Forest Meadow",
+      "era": [
+        "adult",
+        "child"
+      ],
+      "x": 90.8,
+      "y": 55.625,
+      "summary": "The Sacred Forest Meadow is a location in Ocarina of Time. ",
+      "scenes": {
+        "child": {
+          "n64": "zelview/spot05_scene",
+          "oot3d": "oot3d/spot05"
+        },
+        "adult": {
+          "n64": "zelview/spot05_scene",
+          "oot3d": "oot3d/spot05"
+        }
+      }
+    },
+    {
+      "entity_id": "shadow_temple",
+      "name": "Shadow Temple",
+      "region": "Hyrule",
+      "era": [
+        "adult"
+      ],
+      "x": 76.2,
+      "y": 29.063,
+      "summary": "The Shadow Temple, also known as the House of the Dead, is a Dungeon in Ocarina of Time.",
+      "scenes": {
+        "adult": {
+          "n64": "zelview/HAKAdanCH_scene",
+          "oot3d": "oot3d/hakadan_ch"
+        }
+      }
+    },
+    {
+      "entity_id": "spirit_temple",
+      "name": "Spirit Temple",
+      "region": "Hyrule",
+      "era": [
+        "adult"
+      ],
+      "x": 12.6,
+      "y": 27.5,
+      "summary": "The Spirit Temple, also known as the Vessel of Spirit's Resting Place, is a recurring Dungeon in The Legend of Zelda series.",
+      "scenes": {
+        "adult": {
+          "n64": "zelview/jyasinzou_scene",
+          "oot3d": "oot3d/jyasinzou"
+        }
+      }
+    },
+    {
+      "entity_id": "temple_of_time",
+      "name": "Temple of Time",
+      "region": "Temple of Time",
+      "era": [
+        "adult",
+        "child"
+      ],
+      "x": 51.6,
+      "y": 34.688,
+      "summary": "The Temple of Time is a recurring location in The Legend of Zelda series.",
+      "scenes": {
+        "child": {
+          "n64": "zelview/tokinoma_scene",
+          "oot3d": "oot3d/tokinoma"
+        },
+        "adult": {
+          "n64": "zelview/tokinoma_scene",
+          "oot3d": "oot3d/tokinoma"
+        }
+      }
+    },
+    {
+      "entity_id": "water_temple",
+      "name": "Water Temple",
+      "region": "Hyrule",
+      "era": [
+        "adult"
+      ],
+      "x": 40.8,
+      "y": 87.813,
+      "summary": "The Water Temple is a recurring Dungeon and location in The Legend of Zelda series.",
+      "scenes": {
+        "adult": {
+          "n64": "zelview/MIZUsin_scene",
+          "oot3d": "oot3d/mizusin"
+        }
+      }
+    },
+    {
+      "entity_id": "zora_river",
+      "name": "Zora River",
+      "region": "Zora River",
+      "era": [
+        "adult",
+        "child"
+      ],
+      "x": 80.6,
+      "y": 35.313,
+      "summary": "The Zora River, also known as Zora's River, is a recurring location in the The Legend of Zelda series. It is one of the main bodies of water in Hyrule, with its water source being either Zora's Domain or Zora's Fountain.",
+      "scenes": {
+        "child": {
+          "n64": "zelview/spot03_scene",
+          "oot3d": "oot3d/spot03"
+        },
+        "adult": {
+          "n64": "zelview/spot03_scene",
+          "oot3d": "oot3d/spot03"
+        }
+      }
+    },
+    {
+      "entity_id": "zoras_domain",
+      "name": "Zora's Domain",
+      "region": "Hyrule",
+      "era": [
+        "adult",
+        "child"
+      ],
+      "x": 88.4,
+      "y": 29.688,
+      "summary": "Zora's Domain, also known as the Land of the Zoras, is a recurring location in The Legend of Zelda series. It is based on Zora's Waterfall from A Link to the Past. It serves as the home of the aquatic race known as the Zora.",
+      "scenes": {
+        "child": {
+          "n64": "zelview/spot07_scene",
+          "oot3d": "oot3d/spot07"
+        },
+        "adult": {
+          "n64": "zelview/spot07_scene",
+          "oot3d": "oot3d/spot07"
+        }
+      }
+    },
+    {
+      "entity_id": "zoras_fountain",
+      "name": "Zora's Fountain",
+      "region": "Hyrule",
+      "era": [
+        "adult",
+        "child"
+      ],
+      "x": 93.0,
+      "y": 23.438,
+      "summary": "Zora's Fountain is a location in Ocarina of Time.",
+      "scenes": {
+        "child": {
+          "n64": "zelview/spot08_scene",
+          "oot3d": "oot3d/spot08"
+        },
+        "adult": {
+          "n64": "zelview/spot08_scene",
+          "oot3d": "oot3d/spot08"
+        }
+      }
+    }
+  ]
+}

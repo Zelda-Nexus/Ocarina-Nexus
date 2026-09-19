@@ -1,20 +1,20 @@
-// Databricks notebook source
-// MAGIC %md
-// MAGIC # Gold — stubs RAG
-// MAGIC
-// MAGIC Schema seulement, **aucun calcul** : le chunking et les embeddings sont
-// MAGIC hors perimetre de ce tour (confirme avec l'utilisateur). Ces tables
-// MAGIC existent pour que le schema cible soit visible/deployable des maintenant,
-// MAGIC sans dependre d'un modele d'embedding ou d'une strategie de chunking pas
-// MAGIC encore choisie.
+# Databricks notebook source
+# MAGIC %md
+# MAGIC # Gold — stubs RAG
+# MAGIC
+# MAGIC Schema seulement, **aucun calcul** : le chunking et les embeddings sont
+# MAGIC hors perimetre de ce tour (confirme avec l'utilisateur). Ces tables
+# MAGIC existent pour que le schema cible soit visible/deployable des maintenant,
+# MAGIC sans dependre d'un modele d'embedding ou d'une strategie de chunking pas
+# MAGIC encore choisie.
 
-// COMMAND ----------
+# COMMAND ----------
 
 dbutils.widgets.text("catalog", "ocarina_dev")
-val catalog = dbutils.widgets.get("catalog")
-spark.sql(s"USE CATALOG $catalog")
+catalog = dbutils.widgets.get("catalog")
+spark.sql(f"USE CATALOG {catalog}")
 
-// COMMAND ----------
+# COMMAND ----------
 
 spark.sql("""
   CREATE TABLE IF NOT EXISTS gold.rag_document (
@@ -39,4 +39,4 @@ spark.sql("""
   COMMENT 'Stub — pas de modele d embedding retenu ce tour'
 """)
 
-println("OK — stubs RAG crees (schema uniquement)")
+print("OK — stubs RAG crees (schema uniquement)")

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Ocarina Nexus — Pipelines</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="topbar-inner">
+    <a class="brand" href="/">Ocarina Nexus <span class="brand-sub">lakehouse</span></a>
+    <nav>
+      <a href="/" class="nav-link">Statistiques</a>
+      <a href="/lakehouse" class="nav-link">Requêtes SQL</a>
+      <a href="/pipelines" class="nav-link active">Pipelines</a>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <h1>Pipelines</h1>
+  <p class="lede">
+    Bronze → Silver → Gold → Graphe, dans l'ordre du bundle. Chaque job déclenche le
+    suivant par <code>run_job_task</code> — relancer <code>bronze ingestion</code>
+    seul suffit pour rejouer toute la chaîne en aval.
+  </p>
+
+  <div id="jobList" class="job-list" aria-live="polite">
+    <p class="muted">Chargement…</p>
+  </div>
+</main>
+
+<script src="/static/pipelines.js"></script>
+</body>
+</html>

@@ -284,63 +284,12 @@ section{position:relative;}
 .mosaic .mosaic-grid{mix-blend-mode:overlay; opacity:.5;}
 .mosaic-caption{position:absolute; left:18px; bottom:14px; z-index:2; font-family:var(--serif-display); font-size:.68rem; letter-spacing:.1em; text-transform:uppercase; color:#f6f1da; background:rgba(8,10,6,.55); padding:.5em .9em; border-radius:999px;}
 
-/* ---------- Interactive map ---------- */
+/* ---------- Interactive map (layout shell — the map itself is css/hyrule-map.css) ---------- */
 .hyrule-map-block{margin-top:70px;}
 .hyrule-map-head{max-width:640px; margin-bottom:22px;}
 .hyrule-map-head h3{color:#f6f1da; font-size:1.4rem; margin:6px 0 10px;}
 .hyrule-map-head p{color:#d8d0b4; font-size:.9rem;}
 .hyrule-map-head code{font-family:monospace; background:rgba(8,10,6,.4); padding:.1em .4em; border-radius:3px; font-size:.85em;}
-.map-era-toggle{display:inline-flex; border:1px solid var(--gold); border-radius:999px; padding:4px;}
-.map-era-toggle button{border:0; background:transparent; padding:.6em 1.4em; border-radius:999px; cursor:pointer; font-family:var(--serif-display); text-transform:uppercase; letter-spacing:.08em; font-size:.75rem; font-weight:600; color:var(--ink-dim); transition:background .2s ease,color .2s ease;}
-.map-era-toggle button.active{background:var(--gold); color:var(--ground);}
-.hyrule-map{position:relative; aspect-ratio:16/10; border-radius:6px; overflow:hidden; border:1px solid var(--line); box-shadow:var(--shadow); background:var(--ground-2);}
-.hyrule-map-base{position:absolute; inset:0; width:100%; height:100%; display:block;}
-.hyrule-map-markers{position:absolute; inset:0;}
-.map-marker{
-  position:absolute; transform:translate(-50%,-50%); width:16px; height:16px; border-radius:50%;
-  background:var(--gold-bright); border:2px solid var(--ground); box-shadow:0 0 0 3px rgba(224,192,128,.35);
-  cursor:pointer; padding:0;
-}
-.map-marker::after{
-  content:''; position:absolute; inset:-6px; border-radius:50%; border:1px solid var(--gold-bright);
-  opacity:.6; animation:mapPulse 2.2s ease-out infinite;
-}
-.map-marker[hidden]{display:none;}
-.map-marker:hover, .map-marker:focus-visible{background:#fff;}
-.map-marker .map-marker-label{
-  position:absolute; bottom:calc(100% + 8px); left:50%; transform:translateX(-50%);
-  background:rgba(8,10,6,.8); color:#f6f1da; font-size:.72rem; padding:.35em .7em; border-radius:4px;
-  white-space:nowrap; opacity:0; pointer-events:none; transition:opacity .15s ease;
-}
-.map-marker:hover .map-marker-label, .map-marker:focus-visible .map-marker-label{opacity:1;}
-@keyframes mapPulse{0%{transform:scale(.6); opacity:.7;} 100%{transform:scale(1.8); opacity:0;}}
-@media (prefers-reduced-motion: reduce){ .map-marker::after{animation:none;} }
-
-/* ---------- Map modal ---------- */
-.map-modal[hidden]{display:none;}
-.map-modal{position:fixed; inset:0; z-index:50; display:flex; align-items:center; justify-content:center; padding:20px;}
-.map-modal-backdrop{position:absolute; inset:0; background:rgba(8,10,6,.72);}
-.map-modal-panel{
-  position:relative; background:var(--ground); border:1px solid var(--line); border-radius:6px; box-shadow:var(--shadow);
-  max-width:640px; width:100%; max-height:86vh; overflow-y:auto; padding:34px;
-}
-.map-modal-close{
-  position:absolute; top:14px; right:14px; width:34px; height:34px; border-radius:50%; border:1px solid var(--line);
-  background:transparent; color:var(--ink); font-size:1.2rem; line-height:1; cursor:pointer;
-}
-.map-modal-close:hover{background:var(--gold); color:var(--ground); border-color:var(--gold);}
-#mapModalSummary{color:var(--ink-dim); margin-top:6px;}
-.map-modal-3d{margin-top:22px; border-top:1px solid var(--line); padding-top:20px;}
-.map-modal-3d-label{font-size:.78rem; text-transform:uppercase; letter-spacing:.08em; color:var(--ink-dim); margin-bottom:10px;}
-.map-modal-3d-tabs{display:flex; gap:8px; margin-bottom:12px;}
-.map-modal-3d-tabs button{
-  border:1px solid var(--line); background:transparent; color:var(--ink); padding:.4em 1em; border-radius:999px;
-  font-size:.78rem; cursor:pointer;
-}
-.map-modal-3d-tabs button.active{background:var(--gold); color:var(--ground); border-color:var(--gold);}
-.map-modal-3d-frame{position:relative; aspect-ratio:16/9; background:#000; border-radius:4px; overflow:hidden;}
-.map-modal-3d-frame iframe{position:absolute; inset:0; width:100%; height:100%; border:0;}
-.map-modal-3d-todo{margin-top:22px; border-top:1px solid var(--line); padding-top:20px; font-size:.85rem; color:var(--ink-dim); font-style:italic;}
 
 /* ---------- Edition ---------- */
 #edition{background:var(--ground-2);}
@@ -358,6 +307,7 @@ section{position:relative;}
 .tags img{height:26px; width:auto;}
 .tag{border:1px solid var(--line); border-radius:999px; padding:.3em .9em; font-size:.74rem; letter-spacing:.04em; color:var(--ink-dim);}
 .fine-print{font-size:.78rem; color:var(--ink-dim); border-top:1px solid var(--line); padding-top:16px; margin-top:6px;}
+.lakehouse-cta{display:flex; gap:12px; flex-wrap:wrap; margin-bottom:16px;}
 
 /* ---------- Footer ---------- */
 footer{padding:56px 0 100px; border-top:1px solid var(--line);}
@@ -366,6 +316,9 @@ footer{padding:56px 0 100px; border-top:1px solid var(--line);}
 .footer-note strong{color:var(--ink);}
 .footer-next{font-size:.8rem; color:var(--ink-dim);}
 .footer-next ul{margin:8px 0 0; padding-left:18px;}
+.footer-next li.done{color:var(--ink);}
+.footer-next li.done a{color:var(--gold);}
+.footer-next li.done a:hover{color:var(--gold-bright);}
 .footer-bottom{margin-top:34px; padding-top:20px; border-top:1px solid var(--line); font-size:.75rem; color:var(--ink-dim); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px;}
 
 .reveal{transition:transform .6s ease, opacity .6s ease;}

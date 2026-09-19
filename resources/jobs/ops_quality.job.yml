@@ -12,25 +12,16 @@ resources:
         project: ocarina-nexus
         layer: ops
 
-      job_clusters:
-        - job_cluster_key: ops_cluster
-          new_cluster:
-            spark_version: "15.4.x-scala2.12"
-            node_type_id: "Standard_DS3_v2" # a ajuster au type de noeud reellement disponible
-            num_workers: 1
-            data_security_mode: SINGLE_USER
-
       tasks:
         - task_key: trigger_silver
           run_job_task:
             job_id: ${resources.jobs.silver_transform.id}
 
         - task_key: ops_quality_checks
-          job_cluster_key: ops_cluster
           depends_on:
             - task_key: trigger_silver
           notebook_task:
-            notebook_path: ../../notebooks/ops/01_ops_quality_checks.scala
+            notebook_path: ../../notebooks/ops/01_ops_quality_checks.py
             base_parameters:
               catalog: ${var.catalog}
 
@@ -38,3 +29,9 @@ resources:
         enabled: true
 
       max_concurrent_runs: 1
+
+      # Le service principal de l'App lakehouse (app/) peut monitorer et
+      # relancer ce job depuis /pipelines, jamais en editer la definition.
+      permissions:
+        - level: CAN_MANAGE_RUN
+          service_principal_name: ${var.app_service_principal_id}

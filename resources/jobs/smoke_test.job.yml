@@ -36,3 +36,9 @@ resources:
         enabled: true
 
       max_concurrent_runs: 1
+
+      # Le service principal de l'App lakehouse (app/) peut monitorer et
+      # relancer ce job depuis /pipelines, jamais en editer la definition.
+      permissions:
+        - level: CAN_MANAGE_RUN
+          service_principal_name: ${var.app_service_principal_id}

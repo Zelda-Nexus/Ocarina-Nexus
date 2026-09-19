@@ -21,6 +21,7 @@ dependencies = [
     "loguru>0.7.0",
     "python-dotenv>=1.0.0",
     "pyspark>=4.2.0",
+    "databricks-sdk>=0.40.0",
 ]
 
 [dependency-groups]

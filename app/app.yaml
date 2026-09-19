@@ -1,0 +1,7 @@
+command: ["python", "app.py"]
+
+env:
+  - name: "OCARINA_CATALOG"
+    value: "ocarina_dev"
+  - name: "OCARINA_WAREHOUSE_ID"
+    valueFrom: "sql_warehouse"

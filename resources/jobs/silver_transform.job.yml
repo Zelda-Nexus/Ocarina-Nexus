@@ -18,70 +18,56 @@ resources:
         project: ocarina-nexus
         layer: silver
 
-      job_clusters:
-        - job_cluster_key: silver_cluster
-          new_cluster:
-            spark_version: "15.4.x-scala2.12"
-            node_type_id: "Standard_DS3_v2" # a ajuster au type de noeud reellement disponible
-            num_workers: 1
-            data_security_mode: SINGLE_USER
-
       tasks:
         - task_key: trigger_bronze
           run_job_task:
             job_id: ${resources.jobs.bronze_ingestion.id}
 
         - task_key: silver_entity
-          job_cluster_key: silver_cluster
           depends_on:
             - task_key: trigger_bronze
           notebook_task:
-            notebook_path: ../../notebooks/silver/01_silver_entity.scala
+            notebook_path: ../../notebooks/silver/01_silver_entity.py
             base_parameters:
               catalog: ${var.catalog}
 
         - task_key: silver_i18n
-          job_cluster_key: silver_cluster
           depends_on:
             - task_key: silver_entity
           notebook_task:
-            notebook_path: ../../notebooks/silver/02_silver_i18n.scala
+            notebook_path: ../../notebooks/silver/02_silver_i18n.py
             base_parameters:
               catalog: ${var.catalog}
 
         - task_key: silver_engine
-          job_cluster_key: silver_cluster
           depends_on:
             - task_key: trigger_bronze
           notebook_task:
-            notebook_path: ../../notebooks/silver/03_silver_engine.scala
+            notebook_path: ../../notebooks/silver/03_silver_engine.py
             base_parameters:
               catalog: ${var.catalog}
 
         - task_key: silver_randomizer
-          job_cluster_key: silver_cluster
           depends_on:
             - task_key: trigger_bronze
           notebook_task:
-            notebook_path: ../../notebooks/silver/04_silver_randomizer.scala
+            notebook_path: ../../notebooks/silver/04_silver_randomizer.py
             base_parameters:
               catalog: ${var.catalog}
 
         - task_key: silver_speedrun
-          job_cluster_key: silver_cluster
           depends_on:
             - task_key: trigger_bronze
           notebook_task:
-            notebook_path: ../../notebooks/silver/05_silver_speedrun.scala
+            notebook_path: ../../notebooks/silver/05_silver_speedrun.py
             base_parameters:
               catalog: ${var.catalog}
 
         - task_key: silver_external
-          job_cluster_key: silver_cluster
           depends_on:
             - task_key: trigger_bronze
           notebook_task:
-            notebook_path: ../../notebooks/silver/06_silver_external.scala
+            notebook_path: ../../notebooks/silver/06_silver_external.py
             base_parameters:
               catalog: ${var.catalog}
 
@@ -89,3 +75,9 @@ resources:
         enabled: true
 
       max_concurrent_runs: 1
+
+      # Le service principal de l'App lakehouse (app/) peut monitorer et
+      # relancer ce job depuis /pipelines, jamais en editer la definition.
+      permissions:
+        - level: CAN_MANAGE_RUN
+          service_principal_name: ${var.app_service_principal_id}
